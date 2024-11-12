@@ -1,9 +1,4 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .logo {
   height: 6em;
@@ -11,9 +6,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +19,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +37,77 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+.blue-dark {
+  color: #073B4C;
+}
+
+.bg-blue-dark {
+  background-color: #073B4C;
+}
+
+.yellow-wine {
+  color: #FFD166;
+}
+
+.bg-yellow-wine {
+  background-color: #FFD166;
+}
+
+.bg-input {
+  background-color: #E7E7E7;
+}
+
+.bg-white1 {
+  background-color: #E7E7E7;
+}
+
+.bg-white2 {
+  background-color: #CBCBCB;
+}
+
+.bg-main {
+  background-color: #fef9e7df;
+}
+
+.text-gray {
+  color: #6C6C6C;
+}
+
+#root {
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: left;
+}
+
+* {
+  /* font-family: "Inter", serif !important; */
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.a {
+  color: #FFD166;
+  text-decoration: underline;
+  text-decoration-color: #FFD166;
+  text-decoration-thickness: 2px;
+}
+
+.just-print{
+  display: none;
+}
+
+
+@media print{
+  .just-print{
+    display: block!important;
+  }
+  .no-print{
+    display: none!important;
+  }
 }
