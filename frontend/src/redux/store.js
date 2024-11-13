@@ -4,11 +4,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Default localStorage untuk web
 
 // import slicer
-import DataSlicer from './redux-slicers/data'; // Ganti dengan reducer Anda
+import DataSlicer from './redux-slicers/data.js'; // Ganti dengan reducer Anda
 
 
 const rootReducer = combineReducers({
-    data: DataSlicer, // Tambahkan reducer lainnya jika ada
+    dataweb : DataSlicer, // Tambahkan reducer lainnya jika ada
 });
 
 

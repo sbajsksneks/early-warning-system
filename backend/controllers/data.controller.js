@@ -1,137 +1,154 @@
 import xlsx from 'xlsx';
 import fs from 'fs/promises';
 import path from 'path';
+import { readFile } from 'fs';
 
 // Buat folder untuk menyimpan file JSON jika belum ada
 const JSON_DIR = path.join(process.cwd(), 'uploads', 'json');
 await fs.mkdir(JSON_DIR, { recursive: true });
 
 export const fileupload = async (req, res) => {
-    try {
-        if (!req.files || !req.files.file) {
-            return res.status(400).json({ 
-                message: "Mohon sertakan file yang akan diunggah" 
-            });
-        }
+  try {
+    const { lokasi_pasar, tanggal } = req.body;
+    console.log({lokasi_pasar, tanggal});
 
-        const excelFile = req.files.file;
-        
-        // Baca file Excel
-        const workbook = xlsx.read(excelFile.data, { type: 'buffer' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        
-        // Ambil metadata dengan pengecekan cell A1-A3
-        let metadata = {
-            bulan: "Tidak diketahui",
-            tahun: new Date().getFullYear()
-        };
+    // TASK : BIKININ Supaya hasil akhirnya data_$tahun_$bulan_$lokasipasar.json
 
-        // Cek cell A1 sampai A3
-        for (let i = 1; i <= 3; i++) {
-            const cellRef = `A${i}`;
-            if (worksheet[cellRef] && worksheet[cellRef].v) {
-                const titleMatch = worksheet[cellRef].v.match(/Bulan (\w+) (\d{4})/);
-                if (titleMatch) {
-                    metadata = {
-                        bulan: titleMatch[1],
-                        tahun: parseInt(titleMatch[2])
-                    };
-                    break; // Keluar dari loop jika sudah menemukan metadata
-                }
-            }
-        }
-
-        // Konversi ke JSON dengan format yang diinginkan
-        const rawData = xlsx.utils.sheet_to_json(worksheet, {
-            raw: true,
-            defval: null,
-            blankrows: false,
-            range: 3 // Mulai dari baris keempat (skip 3 baris pertama)
-        });
-
-        // Transformasi data ke format yang diinginkan
-        const formattedData = rawData.map(row => {
-            // Buat objek harga_harian
-            const harga_harian = {};
-            for (let i = 1; i <= 30; i++) {
-                harga_harian[i.toString()] = row[i.toString()] || null;
-            }
-
-            return {
-                Komoditas: row.Komoditas,
-                harga_harian,
-                Terendah: row.Terendah || null,
-                Tertinggi: row.Tertinggi || null,
-                "Rata-rata": row["Rata-rata"] || null
-            };
-        });
-
-        // Buat struktur JSON final
-        const jsonContent = {
-            metadata,
-            data: formattedData
-        };
-
-        // Buat nama file dengan timestamp
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const fileName = `data_${timestamp}.json`;
-        const filePath = path.join(JSON_DIR, fileName);
-
-        // Simpan ke file
-        await fs.writeFile(filePath, JSON.stringify(jsonContent, null, 2));
-
-        console.log('File JSON berhasil disimpan:', fileName);
-        console.log('Metadata:', metadata);
-        console.log('Jumlah data:', formattedData.length);
-
-        res.json({
-            message: "Data berhasil dikonversi dan disimpan",
-            fileName: fileName,
-            timestamp: new Date().toISOString()
-        });
-
-    } catch (error) {
-        console.error('Terjadi kesalahan:', error);
-        res.status(500).json({
-            message: "Terjadi kesalahan dalam proses konversi dan penyimpanan file",
-            error: error.message
-        });
+    if (!req.files || !req.files.file) {
+      return res.status(400).json({
+        message: "Mohon sertakan file yang akan diunggah"
+      });
     }
+
+    const excelFile = req.files.file;
+
+    // Baca file Excel
+    const workbook = xlsx.read(excelFile.data, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    // Ambil metadata dengan pengecekan cell A1-A3
+    let metadata = {
+      bulan: "Tidak diketahui",
+      tahun: new Date().getFullYear(),
+
+    };
+
+
+    // Cek cell A1 sampai A3
+    for (let i = 1; i <= 3; i++) {
+      const cellRef = `A${i}`;
+      if (worksheet[cellRef] && worksheet[cellRef].v) {
+        const titleMatch = worksheet[cellRef].v.match(/Bulan (\w+) (\d{4})/);
+        if (titleMatch) {
+          metadata = {
+
+            bulan: titleMatch[1],
+            tahun: parseInt(titleMatch[2]),
+            lokasi_pasar: `Pasar ${lokasi_pasar}`
+          };
+          break; // Keluar dari loop jika sudah menemukan metadata
+        }
+      }
+    }
+
+    // Konversi ke JSON dengan format yang diinginkan
+    const rawData = xlsx.utils.sheet_to_json(worksheet, {
+      raw: true,
+      defval: null,
+      blankrows: false,
+      range: 3 // Mulai dari baris keempat (skip 3 baris pertama)
+    });
+
+    // Transformasi data ke format yang diinginkan
+    const formattedData = rawData.map(row => {
+      // Buat objek harga_harian
+      const harga_harian = {};
+      for (let i = 1; i <= 30; i++) {
+        harga_harian[i.toString()] = row[i.toString()] || null;
+      }
+
+      return {
+        Komoditas: row.Komoditas,
+        harga_harian,
+        Terendah: row.Terendah || null,
+        Tertinggi: row.Tertinggi || null,
+        "Rata-rata": row["Rata-rata"] || null
+      };
+    });
+
+    // Buat struktur JSON final
+    const jsonContent = {
+      metadata,
+      data: formattedData
+    };
+
+    // Buat nama file dengan timestamp
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const fileName = `data_${timestamp}.json`;
+    const filePath = path.join(JSON_DIR, fileName);
+
+    // Simpan ke file
+    await fs.writeFile(filePath, JSON.stringify(jsonContent, null, 2));
+
+    console.log('File JSON berhasil disimpan:', fileName);
+    console.log('Metadata:', metadata);
+    console.log('Jumlah data:', formattedData.length);
+
+    res.json({
+      message: "Data berhasil dikonversi dan disimpan",
+      fileName: fileName,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Terjadi kesalahan:', error);
+    res.status(500).json({
+      message: "Terjadi kesalahan dalam proses konversi dan penyimpanan file",
+      error: error.message
+    });
+  }
 };
 
 export const getData = async (req, res) => {
-    try {
-        // Baca semua file dalam direktori JSON
-        const files = await fs.readdir(JSON_DIR);
-        
-        // Filter hanya file .json dan urutkan berdasarkan waktu pembuatan (terbaru dulu)
-        const jsonFiles = await Promise.all(
-            files
-                .filter(file => file.endsWith('.json'))
-                .map(async (file) => {
-                    const filePath = path.join(JSON_DIR, file);
-                    const stats = await fs.stat(filePath);
-                    return {
-                        fileName: file,
-                        timestamp: stats.birthtime.toISOString(),
-                        path: filePath
-                    };
-                })
-        );
+  try {
 
-        // Urutkan file berdasarkan timestamp terbaru
-        jsonFiles.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    // TASK : Bikinin untuk bisa filter waktu || contoh input "2024-08" // YEARS dan MONTH
 
-        res.json(jsonFiles);
+    // Baca semua file dalam direktori JSON
+    const files = await fs.readdir(JSON_DIR);
 
-    } catch (error) {
-        console.error('Terjadi kesalahan saat mengambil data:', error);
-        res.status(500).json({
-            message: "Terjadi kesalahan saat mengambil data",
-            error: error.message
-        });
-    }
+    // Filter hanya file .json dan urutkan berdasarkan waktu pembuatan (terbaru dulu)
+    const jsonFiles = await Promise.all(
+      files
+        .filter(file => file.endsWith('.json'))
+        .map(async (file) => {
+          const filePath = path.join(JSON_DIR, file);
+          let data = await fs.readFile(filePath, 'utf-8');
+          data = JSON.parse(data);
+          const stats = await fs.stat(filePath);
+          return {
+            fileName: file,
+            timestamp: stats.birthtime.toISOString(),
+            path: filePath,
+            location : data.metadata.lokasi_pasar
+          };
+        })
+    );
+
+    // Urutkan file berdasarkan timestamp terbaru
+    jsonFiles.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    console.log({ jsonFiles })
+    res.json(jsonFiles);
+
+  } catch (error) {
+    console.error('Terjadi kesalahan saat mengambil data:', error);
+    res.status(500).json({
+      message: "Terjadi kesalahan saat mengambil data",
+      error: error.message
+    });
+  }
 };
 
 // Helper functions
@@ -147,18 +164,18 @@ function calculateKvh(price, average) {
 
 function calculateWeeklyStats(weekPrices) {
   if (weekPrices.length === 0) return { avg: 0, kvh: 0 };
-  
+
   // Hitung rata-rata (AVG)
   const avg = weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length;
-  
+
   // Hitung standar deviasi (SDV)
   const squaredDiffs = weekPrices.map(price => Math.pow(price - avg, 2));
   const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
   const stdDev = Math.sqrt(sumSquaredDiffs / (weekPrices.length - 1));
-  
+
   // Hitung KVH = (SDV/AVG) * 100
   const kvh = (stdDev / avg) * 100;
-  
+
   return {
     avg: Math.round(avg),
     kvh: parseFloat(kvh.toFixed(2))
@@ -169,9 +186,10 @@ function transformDataForPantau(jsonData) {
   const { metadata, data } = jsonData;
   const weekCount = 4;
   const daysPerWeek = 7;
-  
+
   const transformedData = {
     type: "Minggu",
+    location : metadata.lokasi_pasar,
     startDate: `01-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
     endDate: `${new Date(metadata.tahun, getMonthNumber(metadata.bulan), 0).getDate()}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
     countLength: weekCount,
@@ -185,10 +203,10 @@ function transformDataForPantau(jsonData) {
           const weekPrices = Object.entries(item.harga_harian)
             .filter(([day, price]) => {
               const dayNum = parseInt(day);
-              return dayNum >= weekStart && 
-                     dayNum <= weekEnd && 
-                     price !== null && 
-                     price !== undefined;
+              return dayNum >= weekStart &&
+                dayNum <= weekEnd &&
+                price !== null &&
+                price !== undefined;
             })
             .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
 
@@ -209,11 +227,11 @@ function transformDataForPantau(jsonData) {
     const kvhValues = transformedData.datas
       .map(item => item.details[weekIndex].Kvh)
       .filter(kvh => !isNaN(kvh) && kvh !== null);
-    
-    const avgKvh = kvhValues.length > 0 
-      ? kvhValues.reduce((sum, kvh) => sum + kvh, 0) / kvhValues.length 
+
+    const avgKvh = kvhValues.length > 0
+      ? kvhValues.reduce((sum, kvh) => sum + kvh, 0) / kvhValues.length
       : 0;
-    
+
     return parseFloat(avgKvh.toFixed(2));
   });
 
@@ -231,6 +249,7 @@ export const getJsonContent = async (req, res) => {
 
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const jsonContent = JSON.parse(fileContent);
+    console.log({fileContent});
 
     const transformedData = transformDataForPantau(jsonContent);
 
@@ -298,7 +317,7 @@ function calculateDetailedStats(jsonContent) {
     weeklyStats: Array.from({ length: weekCount }, (_, weekIndex) => {
       const weekStart = weekIndex * daysPerWeek + 1;
       const weekEnd = Math.min(weekStart + 6, 30);
-      
+
       return {
         weekNumber: weekIndex + 1,
         period: `${weekStart} - ${weekEnd} ${metadata.bulan}`,
@@ -306,20 +325,20 @@ function calculateDetailedStats(jsonContent) {
           const weekPrices = Object.entries(item.harga_harian)
             .filter(([day, price]) => {
               const dayNum = parseInt(day);
-              return dayNum >= weekStart && 
-                     dayNum <= weekEnd && 
-                     price !== null;
+              return dayNum >= weekStart &&
+                dayNum <= weekEnd &&
+                price !== null;
             })
             .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
 
           // Hitung statistik
-          const avg = weekPrices.length > 0 
-            ? weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length 
+          const avg = weekPrices.length > 0
+            ? weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length
             : 0;
 
           const squaredDiffs = weekPrices.map(price => Math.pow(price - avg, 2));
           const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
-          const stdDev = weekPrices.length > 1 
+          const stdDev = weekPrices.length > 1
             ? Math.sqrt(sumSquaredDiffs / (weekPrices.length - 1))
             : 0;
 
@@ -341,18 +360,18 @@ function calculateDetailedStats(jsonContent) {
               const weekPrices = Object.entries(item.harga_harian)
                 .filter(([day, price]) => {
                   const dayNum = parseInt(day);
-                  return dayNum >= weekStart && 
-                         dayNum <= weekEnd && 
-                         price !== null;
+                  return dayNum >= weekStart &&
+                    dayNum <= weekEnd &&
+                    price !== null;
                 })
                 .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
 
-              const avg = weekPrices.length > 0 
-                ? weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length 
+              const avg = weekPrices.length > 0
+                ? weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length
                 : 0;
               const squaredDiffs = weekPrices.map(price => Math.pow(price - avg, 2));
               const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
-              const stdDev = weekPrices.length > 1 
+              const stdDev = weekPrices.length > 1
                 ? Math.sqrt(sumSquaredDiffs / (weekPrices.length - 1))
                 : 0;
               return avg > 0 ? (stdDev / avg) * 100 : 0;
@@ -367,13 +386,13 @@ function calculateDetailedStats(jsonContent) {
         .filter(price => price !== null)
         .map(price => parseFloat(price.replace(/\./g, '')));
 
-      const avg = allPrices.length > 0 
-        ? allPrices.reduce((sum, price) => sum + price, 0) / allPrices.length 
+      const avg = allPrices.length > 0
+        ? allPrices.reduce((sum, price) => sum + price, 0) / allPrices.length
         : 0;
 
       const squaredDiffs = allPrices.map(price => Math.pow(price - avg, 2));
       const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
-      const stdDev = allPrices.length > 1 
+      const stdDev = allPrices.length > 1
         ? Math.sqrt(sumSquaredDiffs / (allPrices.length - 1))
         : 0;
 

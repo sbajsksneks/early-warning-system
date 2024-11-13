@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  datas : []
+  datapantau : 1
 }
 
 export const counterSlice = createSlice({
-  name: 'data',
+  name: 'dataweb',
   initialState,
   reducers: {
     cleanDatas: (state) => {
-      state.datas = [];
+      state.datapantau = null;
     },
     setDatas: (state, property) => {
-      state.datas += property.payload;
+      state.datapantau = property.payload;
     },
   },
 })
