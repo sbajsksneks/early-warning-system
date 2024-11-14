@@ -18,16 +18,21 @@ export default function Datas() {
     const {datapantau} = useSelector((state) => state.dataweb);
     const dispacth = useDispatch();
     const navigate = useNavigate();
+    const [selectedDate, setSelectedDate] = useState('');
 
     useEffect(() => {
         fetchDataFiles();
         console.log({datapantau})
         dispacth(cleanDatas());
-    }, [])
+    }, [selectedDate])
 
     const fetchDataFiles = async () => {
         try {
-            const res = await fetch("/api/data/getdatas");
+            const url = selectedDate 
+                ? `/api/data/getdatas?date=${selectedDate}`
+                : "/api/data/getdatas";
+            
+            const res = await fetch(url);
             const resdata = await res.json();
             console.log({ resdata })
             setDataFile(resdata);
@@ -53,8 +58,10 @@ export default function Datas() {
             console.log({ error })
         }
     }
-  
 
+    const handleDateChange = (e) => {
+        setSelectedDate(e.target.value);
+    };
 
     return (
         <div className="min-h-[100vh]">
@@ -87,15 +94,8 @@ export default function Datas() {
                         <input
                             type="month"
                             data-aos="fade-left"
-                            // selectsRange
-                            // startDate={startDate}
-                            // endDate={endDate}
-                            // onChange={(dates) => {
-                            //     const [start, end] = dates;
-                            //     setStartDate(start);
-                            //     setEndDate(end);
-                            // }}
-                            // isClearable
+                            value={selectedDate}
+                            onChange={handleDateChange}
                             placeholderText='Filter berdasarkan waktu'
                             className="lg:p-3.5 p-3 md:pe-[10vw] pe-[30vw] bg-[#E7E7E7]/90 text-[#6C6C6C] font-[500] lg:mb-0 mb-4 rounded text-sm sm:me-0 me-3 md:text-[16px] lg:min-w-[20vw] md:w-fit w-full min-w-screen inline-block"
                         />
