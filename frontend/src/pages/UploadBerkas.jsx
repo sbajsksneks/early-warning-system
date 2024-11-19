@@ -9,6 +9,7 @@ export default function UploadBerkas() {
     const [fileName, setFileName] = useState(null);
     const [location, setLocation] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [tanggalAwal, setTanggalAwal] = useState(null);
     const [error, setError] = useState(null);
     const [month, setMonth] = useState(null);
 
@@ -38,8 +39,9 @@ export default function UploadBerkas() {
             const formData = new FormData();
 
             formData.append('file', file);
-            formData.append('lokasi_pasar', location)
+            formData.append('lokasi_pasar', location);
             formData.append('tanggal', month);
+            formData.append('tanggal_awal', tanggalAwal);
             // console.log('oke')
 
             const response = await fetch('/api/data/upload', {
@@ -156,7 +158,7 @@ export default function UploadBerkas() {
                         <span className="blue-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="none" stroke="#073b4c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 16.5h2V23M5 12h22m-6-4V4M11 8V4M7 28h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2"/></svg>
                         </span>
-                        <select onChange={(e) => setLocation(e.target.value)} required className="bg-input text-gray  py-3 rounded-md px-4" name="" id="">
+                        <select onChange={(e) => setTanggalAwal(e.target.value)} required className="bg-input text-gray  py-3 rounded-md px-4" name="" id="">
                             <option value="" selected disabled>Hari Senin Di Minggu Pertama Jatuh Pada Tanggal</option>
                             {Array.from({length : 31}).map((_v, _i) => {
                                 return(
