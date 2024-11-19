@@ -1,18 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import logoPemerintah from '../assets/cropped-icon-removebg-preview.png';
 
 export default function Navbar() {
     const url = location.pathname;
 
-    return ( 
+    return (
         <nav className="bg-main  border-b-2 flex flex-col w-full">
             <div className="flex p-8 px-16 text-[24px] font-semibold">
-                <div className="max-w-md">
-                    <h1 className="blue-dark">EarlyWarning
-                        <span className="yellow-wine">System</span>
-                    </h1>
-                    <p className="blue-dark mt-2 uppercase font-semibold text-sm">System informasi Peringatan Dini Kebutuhan Pokok Pangan Masyarakat di daerah Cirebon, Sumber.</p>
+                <div className=" flex gap-2 items-center">
+                    <div className="">
+
+                        <img src={logoPemerintah} alt="" className="max-w-[64px]" />
+                    </div>
+                    <div className="max-w-xl">
+                        <h1 className="blue-dark">EarlyWarning
+                            <span className="yellow-wine">System</span>
+                        </h1>
+                        <p className="blue-dark mt-2 uppercase font-semibold text-sm">Sistem informasi Peringatan Kebutuhan Pokok Masyarakat (KEPOKMAS) <br /> Kabupaten Cirebon</p>
+                    </div>
                 </div>
 
             </div>

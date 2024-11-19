@@ -34,13 +34,13 @@ export default function Side() {
                 {url == "/datas" ? (
                     <Link to={'/datas'} className="py-3 px-12 flex items-center gap-2 bg-blue-dark text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20 6c0-2.168-3.663-4-8-4S4 3.832 4 6v2c0 2.168 3.663 4 8 4s8-1.832 8-4zm-8 13c-4.337 0-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3c0 2.168-3.663 4-8 4" /><path fill="currentColor" d="M20 10c0 2.168-3.663 4-8 4s-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4z" /></svg>
-                        Datas
+                        Data Komoditas
                     </Link>
                 ) : (
                     <Link to={'/datas'} className="py-3 px-12 flex items-center gap-2 blue-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20 6c0-2.168-3.663-4-8-4S4 3.832 4 6v2c0 2.168 3.663 4 8 4s8-1.832 8-4zm-8 13c-4.337 0-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3c0 2.168-3.663 4-8 4" /><path fill="currentColor" d="M20 10c0 2.168-3.663 4-8 4s-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4z" /></svg>
-                        Datas
-                    </Link>
+                        Datas Komoditas
+                    </Link> 
                 )}
 
 
@@ -60,7 +60,7 @@ export default function Side() {
 
             </div>
 
-            <p className="py-16 px-12 flex items-center gap-2  blue-dark font-semibold text-[18px]">EarlyWarning<span className="yellow-wine">System</span>
+            <p className="py-16 px-12 flex items-center gap-2  blue-dark font-bold text-[18px]">EarlyWarning<span className="yellow-wine">System</span>
             </p>
         </div>
     );

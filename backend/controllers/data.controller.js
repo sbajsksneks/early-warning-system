@@ -70,6 +70,7 @@ export const fileupload = async (req, res) => {
 
     // Ambil metadata
     let metadata = {
+      timestamp : `${tanggal}-01`,
       bulan: "Tidak diketahui",
       tahun: new Date().getFullYear(),
       lokasi_pasar: `Pasar ${lokasi_pasar}`
@@ -128,6 +129,7 @@ export const fileupload = async (req, res) => {
 
     await fs.writeFile(filePath, JSON.stringify(jsonContent, null, 2));
 
+    console.log({tanggal});
     res.json({
       message: "Data berhasil dikonversi dan disimpan",
       fileName: fileName,
@@ -182,7 +184,7 @@ export const getData = async (req, res) => {
           const stats = await fs.stat(filePath);
           return {
             fileName: file,
-            timestamp: stats.birthtime.toISOString(),
+            timestamp: data.metadata.timestamp,
             path: filePath,
             location: data.metadata.lokasi_pasar
           };

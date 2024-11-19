@@ -17,10 +17,10 @@ export default function Dashboard() {
                 <div className="flex flex-col gap-3 m-8 max-w-xl blue-dark">
 
                    
-                <h1 className="text-2xl font-bold">Data Akomoditas</h1>
+                <h1 className="text-2xl font-bold">Home</h1>
                     <p>
-                        Halo selamat datang, EarlyWarning System adalah aplikasi web sederhana yang dapat memantau, menghitung, dan mengklasifikasikan tingkat stabilitas harga kebutuhan pokok berdasarkan Koefisien Variasi Harga (KVH)</p>
-                    <p>Pengguna dapat mengunggah file ( dalam format JSON ) yang berisi data harga Kepokmas.
+                        Halo selamat datang, EarlyWarning Sistem adalah aplikasi web sederhana yang dapat memantau, menghitung, dan mengklasifikasikan tingkat stabilitas harga kebutuhan pokok berdasarkan Koefisien Variasi Harga (KVH)</p>
+                    <p>Pengguna dapat mengunggah file ( dalam format Excel ) yang berisi data harga komoditas pangan.
                     </p>
 
 

@@ -65,16 +65,16 @@ export default function UploadBerkas() {
     }
 
     return (
-        <div className="min-h-[100vh]">
+        <div className="min-h-[100vh] ">
             <Navbar />
 
-            <div className="flex bg-main">
+            <div className="flex bg-main ">
                 <Side />
 
-                <div className="flex flex-col gap-3 m-8 max-w-lg min-w-lg blue-dark">
+                <div className="flex flex-col pb-[30vh] gap-3 m-8 max-w-lg min-w-lg blue-dark">
                     <h1 className="text-2xl font-bold">Upload Berkas</h1>
                     <p>Mulai Upload Berkas Excel pada system kami.</p>
-                    <p>*Pastikan format Excel sudah sesuai dengan kriteria yang kami rancang. kamu bisa melihat contohnya <Link className="yellow-wine a">disini</Link>
+                    <p>*Pastikan format Excel yang di input berasal dari website resmi Kepokmas Cirebon. <a href="http://kepokmas.cirebonkab.go.id/" target="_blank" className="yellow-wine a">http://kepokmas.cirebonkab.go.id/</a>
                     </p>
 
                     <div className="flex gap-3 items-center">
@@ -92,7 +92,9 @@ export default function UploadBerkas() {
                             <option value="Ciledug">Pasar Ciledug</option>
                         </select>
                     </div>
+
                    
+                    
                     <div className="flex gap-3 items-center">
                         <span className="blue-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -148,6 +150,20 @@ export default function UploadBerkas() {
                             <option value="mingguan" selected>Filter Mingguan</option>
                             <option value="bulanan" selected>Filter Bulanan</option>
                         </select> */}
+                    </div>
+
+                    <div className="flex gap-3 items-center">
+                        <span className="blue-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="none" stroke="#073b4c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 16.5h2V23M5 12h22m-6-4V4M11 8V4M7 28h18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2"/></svg>
+                        </span>
+                        <select onChange={(e) => setLocation(e.target.value)} required className="bg-input text-gray  py-3 rounded-md px-4" name="" id="">
+                            <option value="" selected disabled>Hari Senin Di Minggu Pertama Jatuh Pada Tanggal</option>
+                            {Array.from({length : 31}).map((_v, _i) => {
+                                return(
+                                    <option value={_i + 1}> Tanggal {_i + 1}</option>
+                                )
+                            })}
+                        </select>
                     </div>
 
                     <button
