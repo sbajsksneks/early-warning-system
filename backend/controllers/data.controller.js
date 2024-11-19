@@ -47,7 +47,8 @@ const KOMODITAS_MAPPING = {
 
 export const fileupload = async (req, res) => {
   try {
-    const { lokasi_pasar, tanggal } = req.body;
+    const { lokasi_pasar, tanggal_awal } = req.body;
+    const startDay = parseInt(tanggal_awal);
 
     if (!req.files || !req.files.file) {
       return res.status(400).json({
@@ -70,7 +71,6 @@ export const fileupload = async (req, res) => {
 
     // Ambil metadata
     let metadata = {
-      timestamp : `${tanggal}-01`,
       bulan: "Tidak diketahui",
       tahun: new Date().getFullYear(),
       lokasi_pasar: `Pasar ${lokasi_pasar}`
@@ -102,38 +102,95 @@ export const fileupload = async (req, res) => {
 
     const daysInMonth = getDaysInMonth(metadata.bulan, metadata.tahun);
 
-    // Format data dengan mempertahankan semua komoditas
+    // Generate periode mingguan berdasarkan tanggal awal yang dipilih
+    function generateWeeklyPeriods(startDay, daysInMonth, bulan) {
+      const periods = [];
+      let currentDay = startDay;
+      let weekNumber = 1;
+
+      while (currentDay <= daysInMonth) {
+        const endDay = Math.min(currentDay + 6, daysInMonth);
+        periods.push({
+          minggu: weekNumber,
+          start: currentDay,
+          end: endDay,
+          periode: `${currentDay}-${endDay} ${bulan}`
+        });
+        currentDay = endDay + 1;
+        weekNumber++;
+      }
+      return periods;
+    }
+
+    // Format data dengan periode mingguan yang benar
     const formattedData = rawData.map(row => {
       const harga_harian = {};
-      for (let i = 1; i <= daysInMonth; i++) {
+      const harga_mingguan = {};
+      
+      // Hanya ambil data mulai dari tanggal yang dipilih
+      for (let i = startDay; i <= daysInMonth; i++) {
         harga_harian[i.toString()] = row[i.toString()] || "0";
       }
+
+      // Hitung data mingguan
+      const weeklyPeriods = generateWeeklyPeriods(startDay, daysInMonth, metadata.bulan);
+      weeklyPeriods.forEach(period => {
+        let total = 0;
+        let count = 0;
+        
+        for (let day = period.start; day <= period.end; day++) {
+          const price = parseFloat(harga_harian[day.toString()]?.replace(/\./g, '') || "0");
+          if (price > 0) {
+            total += price;
+            count++;
+          }
+        }
+
+        const avgPrice = count > 0 ? (total / count).toFixed(2) : "0";
+        
+        harga_mingguan[`minggu_${period.minggu}`] = {
+          periode: period.periode,
+          rata_rata: avgPrice
+        };
+      });
 
       return {
         Komoditas: row.Komoditas,
         harga_harian,
-        Terendah: row.Terendah || "0",
-        Tertinggi: row.Tertinggi || "0",
-        "Rata-rata": row["Rata-rata"] || "0"
+        harga_mingguan,
+        Terendah: calculateTerendah(harga_harian),
+        Tertinggi: calculateTertinggi(harga_harian),
+        "Rata-rata": calculateRataRata(harga_harian)
       };
     });
 
-    // Buat struktur JSON final
+    // Update metadata dengan format yang diminta
+    const monthNumber = getMonthNumber(metadata.bulan);
+    metadata = {
+      timestamp: `${metadata.tahun}-${String(monthNumber + 1).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`,
+      start: `${String(startDay).padStart(2, '0')} ${metadata.bulan} ${metadata.tahun}`,
+      end: `${String(daysInMonth).padStart(2, '0')} ${metadata.bulan} ${metadata.tahun}`,
+      bulan: metadata.bulan,
+      tahun: metadata.tahun,
+      lokasi_pasar: metadata.lokasi_pasar,
+      periode_mingguan: generateWeeklyPeriods(startDay, daysInMonth, metadata.bulan)
+    };
+
     const jsonContent = {
       metadata,
       data: formattedData
     };
 
-    const fileName = `data_${metadata.tahun}_${metadata.bulan}_${metadata.lokasi_pasar}.json`;
+    // Simpan file dengan format nama yang sesuai
+    const fileName = `data_${metadata.tahun}_${metadata.bulan}_${metadata.lokasi_pasar.replace('Pasar ', '')}.json`;
     const filePath = path.join(JSON_DIR, fileName);
-
+    
     await fs.writeFile(filePath, JSON.stringify(jsonContent, null, 2));
 
-    console.log({tanggal});
     res.json({
-      message: "Data berhasil dikonversi dan disimpan",
-      fileName: fileName,
-      timestamp: new Date().toISOString()
+      message: "File berhasil diupload dan dikonversi",
+      fileName,
+      metadata
     });
 
   } catch (error) {
@@ -184,7 +241,7 @@ export const getData = async (req, res) => {
           const stats = await fs.stat(filePath);
           return {
             fileName: file,
-            timestamp: data.metadata.timestamp,
+            timestamp: stats.birthtime.toISOString(),
             path: filePath,
             location: data.metadata.lokasi_pasar
           };
@@ -204,8 +261,21 @@ export const getData = async (req, res) => {
 
 // Helper functions
 function getMonthNumber(monthName) {
-  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-  return months.indexOf(monthName);
+  const monthMap = {
+    'Januari': 0,
+    'Februari': 1,
+    'Maret': 2,
+    'April': 3,
+    'Mei': 4,
+    'Juni': 5,
+    'Juli': 6,
+    'Agustus': 7,
+    'September': 8,
+    'Oktober': 9,
+    'November': 10,
+    'Desember': 11
+  };
+  return monthMap[monthName] || 0;
 }
 
 function calculateKvh(price, average) {
@@ -261,87 +331,91 @@ function calculateWeeklyStats(weekPrices) {
 
 // Fungsi helper untuk normalisasi string
 function normalizeString(str) {
-  return str.toLowerCase().replace(/\s+/g, ' ').trim();
+  if (!str) return '';
+  return str.toLowerCase().trim();
 }
 
 function transformDataForPantau(jsonData) {
+  if (!jsonData || !jsonData.metadata || !jsonData.data) {
+    console.error('Invalid jsonData structure:', jsonData);
+    return {
+      type: "Minggu",
+      location: "Unknown",
+      startDate: "-",
+      endDate: "-",
+      countLength: 4,
+      detail_bulan: Array(4).fill("-"),
+      datas: []
+    };
+  }
+
   const { metadata, data } = jsonData;
   const weekCount = 4;
   const daysPerWeek = 7;
 
+  // Ambil tanggal mulai dari metadata
+  const startDay = parseInt(metadata.timestamp?.split('-')[2] || 1);
+  
+  // Format tanggal yang benar
+  const startDate = `${startDay}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
+  const endDate = `${new Date(metadata.tahun, getMonthNumber(metadata.bulan) + 1, 0).getDate()}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
+
   const transformedData = {
     type: "Minggu",
     location: metadata.lokasi_pasar,
-    startDate: `01-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
-    endDate: `${new Date(metadata.tahun, getMonthNumber(metadata.bulan), 0).getDate()}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
+    startDate,
+    endDate,
     countLength: weekCount,
     detail_bulan: Array(weekCount).fill(metadata.bulan),
-    datas: KOMODITAS_LIST.map(komoditas => {
-      // Gunakan mapping untuk mencari data yang sesuai
-      const excelKomoditas = KOMODITAS_MAPPING[komoditas];
-      const item = data.find(d => 
-        normalizeString(d.Komoditas) === normalizeString(excelKomoditas)
-      );
-      
-      if (!item) {
-        console.log(`Data tidak ditemukan untuk komoditas: ${komoditas} (${excelKomoditas})`);
-      }
-
-      return {
-        Nama_pangan: komoditas,
-        details: Array.from({ length: weekCount }, (_, weekIndex) => {
-          if (!item) {
-            return {
-              title: `Minggu ${weekIndex + 1}`,
-              Avg_rupiah: 0,
-              Kvh: 0
-            };
-          }
-
-          const weekStart = weekIndex * daysPerWeek + 1;
-          const weekEnd = Math.min(weekStart + 6, 30);
-          const weekPrices = Object.entries(item.harga_harian)
-            .filter(([day, price]) => {
-              const dayNum = parseInt(day);
-              const priceNum = parseFloat(String(price).replace(/\./g, ''));
-              // Filter berdasarkan range hari dan harga tidak 0
-              return dayNum >= weekStart && 
-                     dayNum <= weekEnd && 
-                     priceNum > 0; // Hanya ambil harga yang lebih dari 0
-            })
-            .map(([_, price]) => parseFloat(String(price).replace(/\./g, '')));
-
-          const { avg: Avg_rupiah, kvh: Kvh } = calculateWeeklyStats(weekPrices);
-
-          return {
-            title: `Minggu ${weekIndex + 1}`,
-            Avg_rupiah,
-            Kvh
-          };
-        })
-      };
-    })
+    datas: []
   };
 
-  // Hitung KVH rata-rata mingguan
-  transformedData.weeklyAverageKVH = Array(weekCount).fill(0).map((_, weekIndex) => {
-    // Ambil hanya komoditas yang memiliki data valid (harga > 0) untuk minggu tersebut
-    const validKomoditas = transformedData.datas.filter(item => {
-      const weekPrices = Object.entries(item.details[weekIndex])
-        .filter(([key, value]) => key === 'Avg_rupiah' && value > 0);
-      return weekPrices.length > 0;
-    });
+  // Map data komoditas
+  transformedData.datas = KOMODITAS_LIST.map(komoditas => {
+    const excelKomoditas = KOMODITAS_MAPPING[komoditas];
+    const item = data.find(d => 
+      normalizeString(d.Komoditas) === normalizeString(excelKomoditas)
+    );
 
-    // Ambil nilai KVH dari komoditas yang valid
-    const kvhValues = validKomoditas
-      .map(item => item.details[weekIndex].Kvh)
+    if (!item) {
+      return {
+        Nama_pangan: komoditas,
+        details: Array(weekCount).fill().map((_, i) => ({
+          title: `Minggu ${i + 1}`,
+          Avg_rupiah: 0,
+          Kvh: 0
+        }))
+      };
+    }
+
+    // Hitung detail mingguan
+    const details = [];
+    for (let weekIndex = 0; weekIndex < weekCount; weekIndex++) {
+      const weekKey = `minggu_${weekIndex + 1}`;
+      const weekData = item.harga_mingguan?.[weekKey] || {};
+      
+      details.push({
+        title: `Minggu ${weekIndex + 1}`,
+        Avg_rupiah: parseFloat(weekData.rata_rata || 0),
+        Kvh: parseFloat(weekData.kvh || 0)
+      });
+    }
+
+    return {
+      Nama_pangan: komoditas,
+      details
+    };
+  });
+
+  // Hitung rata-rata KVH mingguan
+  transformedData.weeklyAverageKVH = Array(weekCount).fill(0).map((_, weekIndex) => {
+    const validKvhValues = transformedData.datas
+      .map(item => item.details[weekIndex]?.Kvh)
       .filter(kvh => !isNaN(kvh) && kvh > 0);
 
-    // Jika tidak ada komoditas yang valid, return 0
-    if (kvhValues.length === 0) return 0;
-
-    // Hitung rata-rata KVH hanya dari komoditas yang memiliki data
-    return parseFloat((kvhValues.reduce((sum, kvh) => sum + kvh, 0) / kvhValues.length).toFixed(2));
+    return validKvhValues.length > 0
+      ? parseFloat((validKvhValues.reduce((a, b) => a + b, 0) / validKvhValues.length).toFixed(2))
+      : 0;
   });
 
   return transformedData;
@@ -352,19 +426,99 @@ export const getJsonContent = async (req, res) => {
   try {
     const { fileName } = req.params;
     const filePath = path.join(JSON_DIR, fileName);
+    console.log('Reading file:', filePath);
 
     const fileContent = await fs.readFile(filePath, 'utf-8');
     const jsonContent = JSON.parse(fileContent);
-    console.log({fileContent});
+    console.log('Raw JSON content:', jsonContent);
 
-    const transformedData = transformDataForPantau(jsonContent);
+    // Pastikan data memiliki struktur yang benar
+    if (!jsonContent || !jsonContent.metadata || !jsonContent.data) {
+      throw new Error('Invalid JSON structure');
+    }
 
+    // Transform data untuk format yang dibutuhkan frontend
+    const transformedData = {
+      type: "Minggu",
+      location: jsonContent.metadata.lokasi_pasar,
+      startDate: jsonContent.metadata.start,
+      endDate: jsonContent.metadata.end,
+      countLength: 4,
+      detail_bulan: Array(4).fill(jsonContent.metadata.bulan),
+      datas: KOMODITAS_LIST.map(komoditas => {
+        // Cari data komoditas yang sesuai
+        const item = jsonContent.data.find(d => 
+          normalizeString(d.Komoditas) === normalizeString(KOMODITAS_MAPPING[komoditas])
+        );
+
+        // Default structure jika data tidak ditemukan
+        const defaultWeekData = {
+          title: "",
+          Avg_rupiah: 0,
+          Kvh: 0
+        };
+
+        if (!item) {
+          return {
+            Nama_pangan: komoditas,
+            details: Array(4).fill().map((_, i) => ({
+              ...defaultWeekData,
+              title: `Minggu ${i + 1}`
+            }))
+          };
+        }
+
+        // Generate data mingguan
+        const details = [];
+        for (let i = 1; i <= 4; i++) {
+          const weekData = item.harga_mingguan?.[`minggu_${i}`] || {};
+          details.push({
+            title: `Minggu ${i}`,
+            Avg_rupiah: parseFloat(weekData.rata_rata || 0),
+            Kvh: parseFloat(weekData.kvh || 0)
+          });
+        }
+
+        return {
+          Nama_pangan: komoditas,
+          details
+        };
+      })
+    };
+
+    // Hitung rata-rata KVH mingguan
+    transformedData.weeklyAverageKVH = Array(4).fill(0).map((_, weekIndex) => {
+      const validKvhValues = transformedData.datas
+        .map(item => item.details[weekIndex]?.Kvh)
+        .filter(kvh => !isNaN(kvh) && kvh > 0);
+
+      return validKvhValues.length > 0
+        ? parseFloat((validKvhValues.reduce((a, b) => a + b, 0) / validKvhValues.length).toFixed(2))
+        : 0;
+    });
+
+    console.log('Transformed data:', transformedData);
     res.json(transformedData);
 
   } catch (error) {
-    console.error('Terjadi kesalahan saat membaca file JSON:', error);
+    console.error('Error in getJsonContent:', error);
+    // Kirim response error yang lebih informatif
     res.status(500).json({
-      message: "Terjadi kesalahan saat membaca file JSON",
+      type: "Minggu",
+      location: "Error",
+      startDate: "-",
+      endDate: "-",
+      countLength: 4,
+      detail_bulan: Array(4).fill("-"),
+      datas: KOMODITAS_LIST.map(komoditas => ({
+        Nama_pangan: komoditas,
+        details: Array(4).fill().map((_, i) => ({
+          title: `Minggu ${i + 1}`,
+          Avg_rupiah: 0,
+          Kvh: 0
+        }))
+      })),
+      weeklyAverageKVH: Array(4).fill(0),
       error: error.message
     });
   }
@@ -532,3 +686,92 @@ function calculateDetailedStats(jsonContent) {
     })
   };
 }
+
+// Helper function untuk menghitung rata-rata antar pasar
+function calculateAverageAcrossMarkets(allData) {
+  if (allData.length === 0) return null;
+
+  const firstData = allData[0];
+  const result = {
+    metadata: { ...firstData.metadata },
+    data: []
+  };
+
+  // Untuk setiap komoditas
+  firstData.data.forEach(item => {
+    const komoditas = item.Komoditas;
+    const avgData = {
+      Komoditas: komoditas,
+      harga_harian: {},
+      Terendah: "0",
+      Tertinggi: "0",
+      "Rata-rata": "0"
+    };
+
+    // Hitung rata-rata harian
+    Object.keys(item.harga_harian).forEach(day => {
+      const prices = allData
+        .map(marketData => {
+          const komoditasData = marketData.data.find(d => d.Komoditas === komoditas);
+          return parseFloat(komoditasData?.harga_harian[day]?.replace(/\./g, '') || "0");
+        })
+        .filter(price => price > 0);
+
+      if (prices.length > 0) {
+        const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+        avgData.harga_harian[day] = avg.toFixed(2);
+      }
+    });
+
+    result.data.push(avgData);
+  });
+
+  return result;
+}
+
+// Helper function untuk menghitung harga terendah
+function calculateTerendah(harga_harian) {
+  const validPrices = Object.values(harga_harian)
+    .map(price => parseFloat(String(price).replace(/\./g, '')))
+    .filter(price => price > 0);
+  
+  return validPrices.length > 0 
+    ? Math.min(...validPrices).toString()
+    : "0";
+}
+
+// Helper function untuk menghitung harga tertinggi
+function calculateTertinggi(harga_harian) {
+  const validPrices = Object.values(harga_harian)
+    .map(price => parseFloat(String(price).replace(/\./g, '')))
+    .filter(price => price > 0);
+  
+  return validPrices.length > 0 
+    ? Math.max(...validPrices).toString()
+    : "0";
+}
+
+// Helper function untuk menghitung rata-rata harga
+function calculateRataRata(harga_harian) {
+  const validPrices = Object.values(harga_harian)
+    .map(price => parseFloat(String(price).replace(/\./g, '')))
+    .filter(price => price > 0);
+  
+  return validPrices.length > 0 
+    ? (validPrices.reduce((a, b) => a + b, 0) / validPrices.length).toFixed(2)
+    : "0";
+}
+
+// Helper function untuk menghitung KVH mingguan
+function calculateWeeklyKvh(prices) {
+  if (!prices || prices.length < 2) return "0";
+  
+  const validPrices = prices.filter(price => price > 0);
+  if (validPrices.length < 2) return "0";
+  
+  const avg = validPrices.reduce((a, b) => a + b, 0) / validPrices.length;
+  const variance = validPrices.reduce((sum, p) => sum + Math.pow(p - avg, 2), 0) / (validPrices.length - 1);
+  const stdDev = Math.sqrt(variance);
+  
+  return ((stdDev / avg) * 100).toFixed(2);
+} 
