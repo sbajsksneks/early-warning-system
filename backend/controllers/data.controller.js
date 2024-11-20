@@ -524,7 +524,124 @@ function transformDataForPantau(jsonData) {
   return transformedData;
 }
 
-// Export functions
+function calculateMarketAverages(results) {
+  if (!results || results.length === 0) {
+    return {
+      weekly: {
+        kvh: Array(4).fill(0),
+        prices: Array(4).fill(0)
+      },
+      monthly: {
+        kvh: 0,
+        price: 0
+      },
+      commodities: []
+    };
+  }
+
+  // Initialize averages structure
+  const averages = {
+    weekly: {
+      kvh: Array(4).fill(0),
+      prices: Array(4).fill(0)
+    },
+    monthly: {
+      kvh: 0,
+      price: 0
+    },
+    commodities: KOMODITAS_LIST.map(komoditas => ({
+      name: komoditas,
+      weekly: {
+        kvh: Array(4).fill(0),
+        prices: Array(4).fill(0)
+      },
+      monthly: {
+        kvh: 0,
+        price: 0
+      }
+    }))
+  };
+
+  // Calculate weekly averages for each commodity
+  KOMODITAS_LIST.forEach((komoditas, komoditasIndex) => {
+    for (let week = 0; week < 4; week++) {
+      let totalKvh = 0;
+      let totalPrice = 0;
+      let validKvhCount = 0;
+      let validPriceCount = 0;
+
+      results.forEach(marketData => {
+        const commodity = marketData.datas.find(item => item.Nama_pangan === komoditas);
+        if (commodity?.details[week]) {
+          const weekData = commodity.details[week];
+          
+          if (weekData.Kvh > 0) {
+            totalKvh += weekData.Kvh;
+            validKvhCount++;
+          }
+
+          if (weekData.Avg_rupiah > 0) {
+            totalPrice += weekData.Avg_rupiah;
+            validPriceCount++;
+          }
+        }
+      });
+
+      // Store weekly averages per commodity
+      averages.commodities[komoditasIndex].weekly.kvh[week] = validKvhCount > 0 
+        ? parseFloat((totalKvh / validKvhCount).toFixed(2)) 
+        : 0;
+      
+      averages.commodities[komoditasIndex].weekly.prices[week] = validPriceCount > 0 
+        ? Math.round(totalPrice / validPriceCount) 
+        : 0;
+
+      // Add to weekly totals
+      averages.weekly.kvh[week] += averages.commodities[komoditasIndex].weekly.kvh[week];
+      averages.weekly.prices[week] += averages.commodities[komoditasIndex].weekly.prices[week];
+    }
+
+    // Calculate monthly averages per commodity
+    const validWeeklyKvh = averages.commodities[komoditasIndex].weekly.kvh.filter(kvh => kvh > 0);
+    const validWeeklyPrices = averages.commodities[komoditasIndex].weekly.prices.filter(price => price > 0);
+
+    averages.commodities[komoditasIndex].monthly.kvh = validWeeklyKvh.length > 0
+      ? parseFloat((validWeeklyKvh.reduce((a, b) => a + b, 0) / validWeeklyKvh.length).toFixed(2))
+      : 0;
+
+    averages.commodities[komoditasIndex].monthly.price = validWeeklyPrices.length > 0
+      ? Math.round(validWeeklyPrices.reduce((a, b) => a + b, 0) / validWeeklyPrices.length)
+      : 0;
+  });
+
+  // Calculate overall weekly averages
+  averages.weekly.kvh = averages.weekly.kvh.map(total => 
+    parseFloat((total / KOMODITAS_LIST.length).toFixed(2))
+  );
+  averages.weekly.prices = averages.weekly.prices.map(total => 
+    Math.round(total / KOMODITAS_LIST.length)
+  );
+
+  // Calculate overall monthly averages
+  const validMonthlyKvh = averages.commodities
+    .map(commodity => commodity.monthly.kvh)
+    .filter(kvh => kvh > 0);
+  
+  const validMonthlyPrices = averages.commodities
+    .map(commodity => commodity.monthly.price)
+    .filter(price => price > 0);
+
+  averages.monthly.kvh = validMonthlyKvh.length > 0
+    ? parseFloat((validMonthlyKvh.reduce((a, b) => a + b, 0) / validMonthlyKvh.length).toFixed(2))
+    : 0;
+
+  averages.monthly.price = validMonthlyPrices.length > 0
+    ? Math.round(validMonthlyPrices.reduce((a, b) => a + b, 0) / validMonthlyPrices.length)
+    : 0;
+
+  return averages;
+}
+
 export const getJsonContent = async (req, res) => {
   try {
     const { files } = req.body; // is Array now :)
@@ -616,31 +733,30 @@ export const getJsonContent = async (req, res) => {
     console.log({ results, countFile })
     // results isinya array dari transformedData
 
-    // TASK 1 : gmn caranya dari array yang ada di variabel result bisa dihitung rata - rata KVH nya dan harganya
+    // Calculate market averages
+    const marketAverages = calculateMarketAverages(results);
 
-    // TASK 2 : kirim ke fe ('kirim hasil response nya aja. kl udh ak coba integrasiin di fe')
-    // res.json(transformedData);
-
+    // Send response
+    res.json({
+      markets: results,
+      averages: marketAverages
+    });
 
   } catch (error) {
     console.error('Error in getJsonContent:', error);
-    // Kirim response error yang lebih informatif
     res.status(500).json({
-      type: "Minggu",
-      location: "Error",
-      startDate: "-",
-      endDate: "-",
-      countLength: 4,
-      detail_bulan: Array(4).fill("-"),
-      datas: KOMODITAS_LIST.map(komoditas => ({
-        Nama_pangan: komoditas,
-        details: Array(4).fill().map((_, i) => ({
-          title: `Minggu ${i + 1}`,
-          Avg_rupiah: 0,
-          Kvh: 0
-        }))
-      })),
-      weeklyAverageKVH: Array(4).fill(0),
+      markets: [],
+      averages: {
+        weekly: {
+          kvh: Array(4).fill(0),
+          prices: Array(4).fill(0)
+        },
+        monthly: {
+          kvh: 0,
+          price: 0
+        },
+        commodities: []
+      },
       error: error.message
     });
   }
