@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.post('/upload', fileupload);
 router.get('/getdatas', getData);
-router.get('/content/:fileName', getJsonContent);
+// router.get('/content/:fileName', getJsonContent);
+router.post('/contents', getJsonContent);
 router.get('/weekly/:fileName', getWeeklyData);
 
 export default router;

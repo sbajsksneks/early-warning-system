@@ -14,7 +14,7 @@ export default function Datas() {
     const [endDate, setEndDate] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [modal, setModal] = useState(false);
-    const [dataFile, setDataFile] = useState([]);
+    const [dataFile, setDataFile] = useState(null);
     const {datapantau} = useSelector((state) => state.dataweb);
     const dispacth = useDispatch();
     const navigate = useNavigate();
@@ -35,16 +35,27 @@ export default function Datas() {
             const res = await fetch(url);
             const resdata = await res.json();
             console.log({ resdata })
+            if(!res.ok){
+                setDataFile(null);
+                return;
+            }
             setDataFile(resdata);
         } catch (error) {
             console.log({ error })
         }
     }
 
-    const getDataFile = async (filename) => {
+    const getDataFile = async (filesname) => { // 
         try {
             setModal(true);
-            const res = await fetch(`/api/data/content/${filename}`);
+            // const res = await fetch(`/api/data/content/${filesname}`);
+            const res = await fetch(`/api/data/contents`, {
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json",
+                }, 
+                body : JSON.stringify({files : [...filesname]})
+            });
             const data = await res.json();
             // console.log({data})
             dispacth(setDatas(data));
@@ -119,24 +130,42 @@ export default function Datas() {
                             </tr>
                         </thead>
                         <tbody className=" text-xs lg:text-sm font-semibold">
-                            {dataFile.length > 0 ? (
-                                dataFile.map((val, _i) => {
+                            {dataFile ? (
+                                Object.entries(dataFile).map((key, index) => {
+
+                                    let date = key[0]; // is date
+                                    let location = '';
+                                    let ArrayOfFiles = [];
+                                    key[1].map((_value, _i) => {
+
+                                        if(_i - key[1].length === -1){
+
+                                            location += `${_value.location}`;
+                                        }else{
+
+                                            location += `${_value.location}, `;
+                                        }
+
+                                        ArrayOfFiles.push(_value.fileName)
+                                    })
+
+                                    console.log({date, key, index, location, ArrayOfFiles})
                                     return (
-                                        <tr className={_i % 2 == 0 ? "bg-white1" : "bg-white2"}>
+                                        <tr className={index % 2 == 0 ? "bg-white1" : "bg-white2"}>
                                             <td className="px-6 py-3 whitespace-nowrap">
-                                                {_i + 1}
+                                                {index + 1}
                                             </td>
                                             <td className="px-6 py-3 whitespace-nowrap">
-                                                {dataFile[_i]['timestamp'].split('T')[0]}
+                                                {date}
                                             </td>
                                             <td className="px-6 py-3 whitespace-nowrap">
                                                 {/* {dataFile[_i]['extension']} */}
-                                                {dataFile[_i]['location']}
+                                                {location}
                                             </td>
 
                                             <td className="px-6 py-3 whitespace-nowrap">
                                                 {/* {String(dataFile[_i]['ketersedian'])} */}
-                                                <button onClick={() => getDataFile(dataFile[_i]['fileName'])} className="px-4 py-2.5 blue-dark bg-yellow-wine font-semibold rounded-md hover:opacity-90 active:opacity-80">
+                                                <button onClick={() => getDataFile(ArrayOfFiles)} className="px-4 py-2.5 blue-dark bg-yellow-wine font-semibold rounded-md hover:opacity-90 active:opacity-80">
                                                     Pantau Data
                                                 </button>
                                             </td>

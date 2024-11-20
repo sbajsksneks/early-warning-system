@@ -126,7 +126,7 @@ export const fileupload = async (req, res) => {
     const formattedData = rawData.map(row => {
       const harga_harian = {};
       const harga_mingguan = {};
-      
+
       // Hanya ambil data mulai dari tanggal yang dipilih
       for (let i = startDay; i <= daysInMonth; i++) {
         harga_harian[i.toString()] = row[i.toString()] || "0";
@@ -137,7 +137,7 @@ export const fileupload = async (req, res) => {
       weeklyPeriods.forEach(period => {
         let total = 0;
         let count = 0;
-        
+
         for (let day = period.start; day <= period.end; day++) {
           const price = parseFloat(harga_harian[day.toString()]?.replace(/\./g, '') || "0");
           if (price > 0) {
@@ -147,7 +147,7 @@ export const fileupload = async (req, res) => {
         }
 
         const avgPrice = count > 0 ? (total / count).toFixed(2) : "0";
-        
+
         harga_mingguan[`minggu_${period.minggu}`] = {
           periode: period.periode,
           rata_rata: avgPrice
@@ -184,7 +184,7 @@ export const fileupload = async (req, res) => {
     // Simpan file dengan format nama yang sesuai
     const fileName = `data_${metadata.tahun}_${metadata.bulan}_${metadata.lokasi_pasar.replace('Pasar ', '')}.json`;
     const filePath = path.join(JSON_DIR, fileName);
-    
+
     await fs.writeFile(filePath, JSON.stringify(jsonContent, null, 2));
 
     res.json({
@@ -204,52 +204,97 @@ export const fileupload = async (req, res) => {
 
 export const getData = async (req, res) => {
   try {
-    const { date } = req.query;
+    const { date } = req.query; // Format: "2024-08"
     const files = await fs.readdir(JSON_DIR);
 
-    const jsonFiles = await Promise.all(
-      files
-        .filter(file => {
-          if (date) {
-            const [year, month] = date.split('-');
-            // Convert month number to name in Indonesian
-            const monthNames = {
-              '01': 'Januari',
-              '02': 'Februari',
-              '03': 'Maret',
-              '04': 'April',
-              '05': 'Mei',
-              '06': 'Juni',
-              '07': 'Juli',
-              '08': 'Agustus',
-              '09': 'September',
-              '10': 'Oktober',
-              '11': 'November',
-              '12': 'Desember'
-            };
-            
-            const monthName = monthNames[month];
-            // Check if filename contains both year and month
-            return file.includes(`data_${year}_${monthName}`) && file.endsWith('.json');
-          }
-          return file.endsWith('.json');
-        })
-        .map(async (file) => {
-          const filePath = path.join(JSON_DIR, file);
-          let data = await fs.readFile(filePath, 'utf-8');
-          data = JSON.parse(data);
-          const stats = await fs.stat(filePath);
-          return {
-            fileName: file,
-            timestamp: stats.birthtime.toISOString(),
-            path: filePath,
-            location: data.metadata.lokasi_pasar
-          };
-        })
-    );
+    // Definisikan nama bulan dalam bahasa Indonesia
+    const monthNames = {
+      'Januari': '01',
+      'Februari': '02',
+      'Maret': '03',
+      'April': '04',
+      'Mei': '05',
+      'Juni': '06',
+      'Juli': '07',
+      'Agustus': '08',
+      'September': '09',
+      'Oktober': '10',
+      'November': '11',
+      'Desember': '12'
+    };
 
-    jsonFiles.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-    res.json(jsonFiles);
+    const groupedFiles = {};
+
+    if (date) {
+      // Logika filter untuk parameter `date` yang terdefinisi
+      const [year, month] = date.split('-');
+      const monthName = Object.keys(monthNames).find(key => monthNames[key] === month);
+
+      if (!monthName) {
+        throw new Error("Format bulan tidak valid");
+      }
+
+      let jsonFiles = await Promise.all(
+        files
+          .filter(file => {
+            return file.includes(`data_${year}_${monthName}`) && file.endsWith('.json');
+          })
+          .map(async (file) => {
+            const filePath = path.join(JSON_DIR, file);
+            let data = await fs.readFile(filePath, 'utf-8');
+            data = JSON.parse(data);
+            return {
+              fileName: file,
+              timestamp: data.metadata.timestamp,
+              path: filePath,
+              location: data.metadata.lokasi_pasar
+            };
+          })
+      );
+
+      if (!jsonFiles.length > 0) {
+        throw new Error(`Tidak ada data yang tersedia di ${date}`);
+      }
+
+      jsonFiles = { [date]: [...jsonFiles] };
+      console.log({ jsonFiles, files });
+
+      jsonFiles[date].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      res.json(jsonFiles);
+    } else {
+      // Logika untuk pengelompokan file jika `date` tidak terdefinisi
+      for (const file of files) {
+        if (file.endsWith('.json')) {
+          const match = file.match(/data_(\d{4})_(\w+)_/);
+          if (match) {
+            const [, year, monthName] = match;
+            const key = `${year}-${monthNames[monthName] || '00'}`;
+
+            if (!groupedFiles[key]) {
+              groupedFiles[key] = [];
+            }
+
+            const filePath = path.join(JSON_DIR, file);
+            let data = await fs.readFile(filePath, 'utf-8');
+            data = JSON.parse(data);
+
+            groupedFiles[key].push({
+              fileName: file,
+              timestamp: data.metadata.timestamp,
+              path: filePath,
+              location: data.metadata.lokasi_pasar
+            });
+          }
+        }
+      }
+
+      // Urutkan data di setiap grup berdasarkan timestamp
+      Object.keys(groupedFiles).forEach(key => {
+        groupedFiles[key].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      });
+
+      res.json(groupedFiles);
+    }
   } catch (error) {
     console.error('Terjadi kesalahan saat mengambil data:', error);
     res.status(500).json({
@@ -258,6 +303,64 @@ export const getData = async (req, res) => {
     });
   }
 };
+
+
+// export const getData = async (req, res) => {
+//   try {
+//     const { date } = req.query; // 2024-08
+//     const files = await fs.readdir(JSON_DIR);
+
+//     const jsonFiles = await Promise.all(
+//       files
+//         .filter(file => {
+//           if (date) {
+//             const [year, month] = date.split('-');
+//             // Convert month number to name in Indonesian
+//             const monthNames = {
+//               '01': 'Januari',
+//               '02': 'Februari',
+//               '03': 'Maret',
+//               '04': 'April',
+//               '05': 'Mei',
+//               '06': 'Juni',
+//               '07': 'Juli',
+//               '08': 'Agustus',
+//               '09': 'September',
+//               '10': 'Oktober',
+//               '11': 'November',
+//               '12': 'Desember'
+//             };
+
+//             const monthName = monthNames[month];
+//             // Check if filename contains both year and month
+//             return file.includes(`data_${year}_${monthName}`) && file.endsWith('.json');
+//           }
+//           return file.endsWith('.json');
+//         })
+//         .map(async (file) => {
+//           const filePath = path.join(JSON_DIR, file);
+//           let data = await fs.readFile(filePath, 'utf-8');
+//           data = JSON.parse(data);
+//           const stats = await fs.stat(filePath);
+//           return {
+//             fileName: file,
+//             timestamp: data.metadata.timestamp,
+//             path: filePath,
+//             location: data.metadata.lokasi_pasar
+//           };
+//         })
+//     );
+
+//     jsonFiles.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+//     res.json(jsonFiles);
+//   } catch (error) {
+//     console.error('Terjadi kesalahan saat mengambil data:', error);
+//     res.status(500).json({
+//       message: "Terjadi kesalahan saat mengambil data",
+//       error: error.message
+//     });
+//   }
+// };
 
 // Helper functions
 function getMonthNumber(monthName) {
@@ -304,7 +407,7 @@ function calculateKVH(standardDeviation, average) {
 function calculateWeeklyStats(weekPrices) {
   // Filter harga 0 sebelum perhitungan
   const validPrices = weekPrices.filter(price => price > 0);
-  
+
   if (validPrices.length === 0) {
     return {
       avg: 0,
@@ -315,10 +418,10 @@ function calculateWeeklyStats(weekPrices) {
 
   // Calculate Average (AVG)
   const avg = calculateAverage(validPrices);
-  
+
   // Calculate Standard Deviation (SDV)
   const stdDev = calculateStandardDeviation(validPrices, avg);
-  
+
   // Calculate KVH
   const kvh = calculateKVH(stdDev, avg);
 
@@ -355,7 +458,7 @@ function transformDataForPantau(jsonData) {
 
   // Ambil tanggal mulai dari metadata
   const startDay = parseInt(metadata.timestamp?.split('-')[2] || 1);
-  
+
   // Format tanggal yang benar
   const startDate = `${startDay}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
   const endDate = `${new Date(metadata.tahun, getMonthNumber(metadata.bulan) + 1, 0).getDate()}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
@@ -373,7 +476,7 @@ function transformDataForPantau(jsonData) {
   // Map data komoditas
   transformedData.datas = KOMODITAS_LIST.map(komoditas => {
     const excelKomoditas = KOMODITAS_MAPPING[komoditas];
-    const item = data.find(d => 
+    const item = data.find(d =>
       normalizeString(d.Komoditas) === normalizeString(excelKomoditas)
     );
 
@@ -393,7 +496,7 @@ function transformDataForPantau(jsonData) {
     for (let weekIndex = 0; weekIndex < weekCount; weekIndex++) {
       const weekKey = `minggu_${weekIndex + 1}`;
       const weekData = item.harga_mingguan?.[weekKey] || {};
-      
+
       details.push({
         title: `Minggu ${weekIndex + 1}`,
         Avg_rupiah: parseFloat(weekData.rata_rata || 0),
@@ -424,81 +527,100 @@ function transformDataForPantau(jsonData) {
 // Export functions
 export const getJsonContent = async (req, res) => {
   try {
-    const { fileName } = req.params;
-    const filePath = path.join(JSON_DIR, fileName);
-    console.log('Reading file:', filePath);
+    const { files } = req.body; // is Array now :)
+    console.log({ files })
 
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const jsonContent = JSON.parse(fileContent);
-    console.log('Raw JSON content:', jsonContent);
+    let results = [];
+    let countFile = 0;
 
-    // Pastikan data memiliki struktur yang benar
-    if (!jsonContent || !jsonContent.metadata || !jsonContent.data) {
-      throw new Error('Invalid JSON structure');
-    }
+    for (const fileName of files) {
 
-    // Transform data untuk format yang dibutuhkan frontend
-    const transformedData = {
-      type: "Minggu",
-      location: jsonContent.metadata.lokasi_pasar,
-      startDate: jsonContent.metadata.start,
-      endDate: jsonContent.metadata.end,
-      countLength: 4,
-      detail_bulan: Array(4).fill(jsonContent.metadata.bulan),
-      datas: KOMODITAS_LIST.map(komoditas => {
-        // Cari data komoditas yang sesuai
-        const item = jsonContent.data.find(d => 
-          normalizeString(d.Komoditas) === normalizeString(KOMODITAS_MAPPING[komoditas])
-        );
+      const filePath = path.join(JSON_DIR, fileName);
+      console.log('Reading file:', filePath);
 
-        // Default structure jika data tidak ditemukan
-        const defaultWeekData = {
-          title: "",
-          Avg_rupiah: 0,
-          Kvh: 0
-        };
+      const fileContent = await fs.readFile(filePath, 'utf-8');
+      const jsonContent = JSON.parse(fileContent);
+      // console.log('Raw JSON content:', jsonContent);
 
-        if (!item) {
+      // Pastikan data memiliki struktur yang benar
+      if (!jsonContent || !jsonContent.metadata || !jsonContent.data) {
+        throw new Error('Invalid JSON structure');
+      }
+
+      // Transform data untuk format yang dibutuhkan frontend
+      const transformedData = {
+        type: "Minggu",
+        location: jsonContent.metadata.lokasi_pasar,
+        startDate: jsonContent.metadata.start,
+        endDate: jsonContent.metadata.end,
+        countLength: 4,
+        detail_bulan: Array(4).fill(jsonContent.metadata.bulan),
+        datas: KOMODITAS_LIST.map(komoditas => {
+          // Cari data komoditas yang sesuai
+          const item = jsonContent.data.find(d =>
+            normalizeString(d.Komoditas) === normalizeString(KOMODITAS_MAPPING[komoditas])
+          );
+
+          // Default structure jika data tidak ditemukan
+          const defaultWeekData = {
+            title: "",
+            Avg_rupiah: 0,
+            Kvh: 0
+          };
+
+          if (!item) {
+            return {
+              Nama_pangan: komoditas,
+              details: Array(4).fill().map((_, i) => ({
+                ...defaultWeekData,
+                title: `Minggu ${i + 1}`
+              }))
+            };
+          }
+
+          // Generate data mingguan
+          const details = [];
+          for (let i = 1; i <= 4; i++) {
+            const weekData = item.harga_mingguan?.[`minggu_${i}`] || {};
+            details.push({
+              title: `Minggu ${i}`,
+              Avg_rupiah: parseFloat(weekData.rata_rata || 0),
+              Kvh: parseFloat(weekData.kvh || 0)
+            });
+          }
+
           return {
             Nama_pangan: komoditas,
-            details: Array(4).fill().map((_, i) => ({
-              ...defaultWeekData,
-              title: `Minggu ${i + 1}`
-            }))
+            details
           };
-        }
+        })
+      };
 
-        // Generate data mingguan
-        const details = [];
-        for (let i = 1; i <= 4; i++) {
-          const weekData = item.harga_mingguan?.[`minggu_${i}`] || {};
-          details.push({
-            title: `Minggu ${i}`,
-            Avg_rupiah: parseFloat(weekData.rata_rata || 0),
-            Kvh: parseFloat(weekData.kvh || 0)
-          });
-        }
+      // Hitung rata-rata KVH mingguan
+      transformedData.weeklyAverageKVH = Array(4).fill(0).map((_, weekIndex) => {
+        const validKvhValues = transformedData.datas
+          .map(item => item.details[weekIndex]?.Kvh)
+          .filter(kvh => !isNaN(kvh) && kvh > 0);
 
-        return {
-          Nama_pangan: komoditas,
-          details
-        };
-      })
-    };
+        return validKvhValues.length > 0
+          ? parseFloat((validKvhValues.reduce((a, b) => a + b, 0) / validKvhValues.length).toFixed(2))
+          : 0;
+      });
 
-    // Hitung rata-rata KVH mingguan
-    transformedData.weeklyAverageKVH = Array(4).fill(0).map((_, weekIndex) => {
-      const validKvhValues = transformedData.datas
-        .map(item => item.details[weekIndex]?.Kvh)
-        .filter(kvh => !isNaN(kvh) && kvh > 0);
+      countFile++;
+      results.push(transformedData);
+      console.log(`Data ${countFile} : ${transformedData.datas[0]}`)
+      // console.log('Transformed data:', transformedData);
+    }
 
-      return validKvhValues.length > 0
-        ? parseFloat((validKvhValues.reduce((a, b) => a + b, 0) / validKvhValues.length).toFixed(2))
-        : 0;
-    });
+    console.log({ results, countFile })
+    // results isinya array dari transformedData
 
-    console.log('Transformed data:', transformedData);
-    res.json(transformedData);
+    // TASK 1 : gmn caranya dari array yang ada di variabel result bisa dihitung rata - rata KVH nya dan harganya
+
+    // TASK 2 : kirim ke fe ('kirim hasil response nya aja. kl udh ak coba integrasiin di fe')
+    // res.json(transformedData);
+
 
   } catch (error) {
     console.error('Error in getJsonContent:', error);
@@ -587,8 +709,8 @@ function calculateDetailedStats(jsonContent) {
               const dayNum = parseInt(day);
               const priceNum = parseFloat(String(price).replace(/\./g, ''));
               return dayNum >= weekStart &&
-                     dayNum <= weekEnd &&
-                     priceNum > 0; // Hanya ambil harga yang lebih dari 0
+                dayNum <= weekEnd &&
+                priceNum > 0; // Hanya ambil harga yang lebih dari 0
             })
             .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
 
@@ -623,9 +745,9 @@ function calculateDetailedStats(jsonContent) {
                 .filter(([day, price]) => {
                   const dayNum = parseInt(day);
                   const priceNum = parseFloat(String(price).replace(/\./g, ''));
-                  return dayNum >= weekStart && 
-                         dayNum <= weekEnd && 
-                         priceNum > 0;
+                  return dayNum >= weekStart &&
+                    dayNum <= weekEnd &&
+                    priceNum > 0;
                 });
               return weekPrices.length > 0;
             });
@@ -734,8 +856,8 @@ function calculateTerendah(harga_harian) {
   const validPrices = Object.values(harga_harian)
     .map(price => parseFloat(String(price).replace(/\./g, '')))
     .filter(price => price > 0);
-  
-  return validPrices.length > 0 
+
+  return validPrices.length > 0
     ? Math.min(...validPrices).toString()
     : "0";
 }
@@ -745,8 +867,8 @@ function calculateTertinggi(harga_harian) {
   const validPrices = Object.values(harga_harian)
     .map(price => parseFloat(String(price).replace(/\./g, '')))
     .filter(price => price > 0);
-  
-  return validPrices.length > 0 
+
+  return validPrices.length > 0
     ? Math.max(...validPrices).toString()
     : "0";
 }
@@ -756,8 +878,8 @@ function calculateRataRata(harga_harian) {
   const validPrices = Object.values(harga_harian)
     .map(price => parseFloat(String(price).replace(/\./g, '')))
     .filter(price => price > 0);
-  
-  return validPrices.length > 0 
+
+  return validPrices.length > 0
     ? (validPrices.reduce((a, b) => a + b, 0) / validPrices.length).toFixed(2)
     : "0";
 }
@@ -765,13 +887,13 @@ function calculateRataRata(harga_harian) {
 // Helper function untuk menghitung KVH mingguan
 function calculateWeeklyKvh(prices) {
   if (!prices || prices.length < 2) return "0";
-  
+
   const validPrices = prices.filter(price => price > 0);
   if (validPrices.length < 2) return "0";
-  
+
   const avg = validPrices.reduce((a, b) => a + b, 0) / validPrices.length;
   const variance = validPrices.reduce((sum, p) => sum + Math.pow(p - avg, 2), 0) / (validPrices.length - 1);
   const stdDev = Math.sqrt(variance);
-  
+
   return ((stdDev / avg) * 100).toFixed(2);
 } 
