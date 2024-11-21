@@ -2,7 +2,6 @@ import xlsx from 'xlsx';
 import fs from 'fs/promises';
 import path from 'path';
 import { readFile } from 'fs';
-import { start } from 'repl';
 
 // Buat folder untuk menyimpan file JSON jika belum ada
 const JSON_DIR = path.join(process.cwd(), 'uploads', 'json');
@@ -136,22 +135,22 @@ export const fileupload = async (req, res) => {
       // Hitung data mingguan
       const weeklyPeriods = generateWeeklyPeriods(startDay, daysInMonth, metadata.bulan);
       weeklyPeriods.forEach(period => {
-        let total = 0;
-        let count = 0;
-
+        let weekPrices = [];
+        
         for (let day = period.start; day <= period.end; day++) {
           const price = parseFloat(harga_harian[day.toString()]?.replace(/\./g, '') || "0");
           if (price > 0) {
-            total += price;
-            count++;
+            weekPrices.push(price);
           }
         }
 
-        const avgPrice = count > 0 ? (total / count).toFixed(2) : "0";
+        const avgPrice = calculateRataRata(weekPrices);
+        const kvh = calculateWeeklyKvh(weekPrices); // Panggil fungsi KVH
 
         harga_mingguan[`minggu_${period.minggu}`] = {
           periode: period.periode,
-          rata_rata: avgPrice
+          rata_rata: avgPrice,
+          kvh: kvh // Tambahkan KVH ke output
         };
       });
 
@@ -382,10 +381,7 @@ function getMonthNumber(monthName) {
   return monthMap[monthName] || 0;
 }
 
-function calculateKvh(price, average) {
-  if (!price || !average) return 0;
-  return parseFloat(((Math.abs(price - average) / average) * 100).toFixed(2));
-}
+
 
 // Helper functions for statistical calculations
 function calculateAverage(prices) {
@@ -439,9 +435,9 @@ function normalizeString(str) {
   return str.toLowerCase().trim();
 }
 
-function transformDataForPantau(jsonData) {
-  if (!jsonData || !jsonData.metadata || !jsonData.data) {
-    console.error('Invalid jsonData structure:', jsonData);
+function transformDataForPantau(jsonContent) {
+  if (!jsonContent || !jsonContent.metadata || !jsonContent.data) {
+    console.error('Invalid jsonData structure:', jsonContent);
     return {
       type: "Minggu",
       location: "Unknown",
@@ -453,22 +449,19 @@ function transformDataForPantau(jsonData) {
     };
   }
 
-  const { metadata, data } = jsonData;
+  const { metadata, data } = jsonContent;
   const weekCount = 4;
   const daysPerWeek = 7;
 
-  // Ambil tanggal mulai dari metadata
+  // Definisikan startDay di awal
   const startDay = parseInt(metadata.timestamp?.split('-')[2] || 1);
-
-  // Format tanggal yang benar
-  const startDate = `${startDay}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
-  const endDate = `${new Date(metadata.tahun, getMonthNumber(metadata.bulan) + 1, 0).getDate()}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`;
+  const daysInMonth = new Date(metadata.tahun, getMonthNumber(metadata.bulan) + 1, 0).getDate();
 
   const transformedData = {
     type: "Minggu",
     location: metadata.lokasi_pasar,
-    startDate,
-    endDate,
+    startDate: `${startDay}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
+    endDate: `${daysInMonth}-${metadata.bulan.substring(0, 3)}-${metadata.tahun}`,
     countLength: weekCount,
     detail_bulan: Array(weekCount).fill(metadata.bulan),
     datas: []
@@ -484,7 +477,7 @@ function transformDataForPantau(jsonData) {
     if (!item) {
       return {
         Nama_pangan: komoditas,
-        details: Array(weekCount).fill().map((_, i) => ({
+        details: Array(4).fill().map((_, i) => ({
           title: `Minggu ${i + 1}`,
           Avg_rupiah: 0,
           Kvh: 0
@@ -492,16 +485,22 @@ function transformDataForPantau(jsonData) {
       };
     }
 
-    // Hitung detail mingguan
+    // Generate data mingguan
     const details = [];
-    for (let weekIndex = 0; weekIndex < weekCount; weekIndex++) {
-      const weekKey = `minggu_${weekIndex + 1}`;
-      const weekData = item.harga_mingguan?.[weekKey] || {};
+    for (let i = 1; i <= 4; i++) {
+      const weekData = item.harga_mingguan?.[`minggu_${i}`] || {};
+      const weekPrices = Object.entries(item.harga_harian)
+        .filter(([day]) => {
+          const dayNum = parseInt(day);
+          return dayNum >= ((i-1) * 7 + 1) && dayNum <= Math.min(i * 7, 31);
+        })
+        .map(([_, price]) => parseFloat(price.replace(/\./g, '')))
+        .filter(price => price > 0);
 
       details.push({
-        title: `Minggu ${weekIndex + 1}`,
+        title: `Minggu ${i}`,
         Avg_rupiah: parseFloat(weekData.rata_rata || 0),
-        Kvh: parseFloat(weekData.kvh || 0)
+        Kvh: parseFloat(calculateWeeklyKvh(weekPrices)) // Panggil fungsi KVH
       });
     }
 
@@ -525,124 +524,7 @@ function transformDataForPantau(jsonData) {
   return transformedData;
 }
 
-function calculateMarketAverages(results) {
-  if (!results || results.length === 0) {
-    return {
-      weekly: {
-        kvh: Array(4).fill(0),
-        prices: Array(4).fill(0)
-      },
-      monthly: {
-        kvh: 0,
-        price: 0
-      },
-      commodities: []
-    };
-  }
-
-  // Initialize averages structure
-  const averages = {
-    weekly: {
-      kvh: Array(4).fill(0),
-      prices: Array(4).fill(0)
-    },
-    monthly: {
-      kvh: 0,
-      price: 0
-    },
-    commodities: KOMODITAS_LIST.map(komoditas => ({
-      name: komoditas,
-      weekly: {
-        kvh: Array(4).fill(0),
-        prices: Array(4).fill(0)
-      },
-      monthly: {
-        kvh: 0,
-        price: 0
-      }
-    }))
-  };
-
-  // Calculate weekly averages for each commodity
-  KOMODITAS_LIST.forEach((komoditas, komoditasIndex) => {
-    for (let week = 0; week < 4; week++) {
-      let totalKvh = 0;
-      let totalPrice = 0;
-      let validKvhCount = 0;
-      let validPriceCount = 0;
-
-      results.forEach(marketData => {
-        const commodity = marketData.datas.find(item => item.Nama_pangan === komoditas);
-        if (commodity?.details[week]) {
-          const weekData = commodity.details[week];
-          
-          if (weekData.Kvh > 0) {
-            totalKvh += weekData.Kvh;
-            validKvhCount++;
-          }
-
-          if (weekData.Avg_rupiah > 0) {
-            totalPrice += weekData.Avg_rupiah;
-            validPriceCount++;
-          }
-        }
-      });
-
-      // Store weekly averages per commodity
-      averages.commodities[komoditasIndex].weekly.kvh[week] = validKvhCount > 0 
-        ? parseFloat((totalKvh / validKvhCount).toFixed(2)) 
-        : 0;
-      
-      averages.commodities[komoditasIndex].weekly.prices[week] = validPriceCount > 0 
-        ? Math.round(totalPrice / validPriceCount) 
-        : 0;
-
-      // Add to weekly totals
-      averages.weekly.kvh[week] += averages.commodities[komoditasIndex].weekly.kvh[week];
-      averages.weekly.prices[week] += averages.commodities[komoditasIndex].weekly.prices[week];
-    }
-
-    // Calculate monthly averages per commodity
-    const validWeeklyKvh = averages.commodities[komoditasIndex].weekly.kvh.filter(kvh => kvh > 0);
-    const validWeeklyPrices = averages.commodities[komoditasIndex].weekly.prices.filter(price => price > 0);
-
-    averages.commodities[komoditasIndex].monthly.kvh = validWeeklyKvh.length > 0
-      ? parseFloat((validWeeklyKvh.reduce((a, b) => a + b, 0) / validWeeklyKvh.length).toFixed(2))
-      : 0;
-
-    averages.commodities[komoditasIndex].monthly.price = validWeeklyPrices.length > 0
-      ? Math.round(validWeeklyPrices.reduce((a, b) => a + b, 0) / validWeeklyPrices.length)
-      : 0;
-  });
-
-  // Calculate overall weekly averages
-  averages.weekly.kvh = averages.weekly.kvh.map(total => 
-    parseFloat((total / KOMODITAS_LIST.length).toFixed(2))
-  );
-  averages.weekly.prices = averages.weekly.prices.map(total => 
-    Math.round(total / KOMODITAS_LIST.length)
-  );
-
-  // Calculate overall monthly averages
-  const validMonthlyKvh = averages.commodities
-    .map(commodity => commodity.monthly.kvh)
-    .filter(kvh => kvh > 0);
-  
-  const validMonthlyPrices = averages.commodities
-    .map(commodity => commodity.monthly.price)
-    .filter(price => price > 0);
-
-  averages.monthly.kvh = validMonthlyKvh.length > 0
-    ? parseFloat((validMonthlyKvh.reduce((a, b) => a + b, 0) / validMonthlyKvh.length).toFixed(2))
-    : 0;
-
-  averages.monthly.price = validMonthlyPrices.length > 0
-    ? Math.round(validMonthlyPrices.reduce((a, b) => a + b, 0) / validMonthlyPrices.length)
-    : 0;
-
-  return averages;
-}
-
+// Export functions
 export const getJsonContent = async (req, res) => {
   try {
     const { files } = req.body; // is Array now :)
@@ -734,60 +616,31 @@ export const getJsonContent = async (req, res) => {
     console.log({ results, countFile })
     // results isinya array dari transformedData
 
-    // Calculate market averages
-    const marketAverages = calculateMarketAverages(results);
+    // TASK 1 : gmn caranya dari array yang ada di variabel result bisa dihitung rata - rata KVH nya dan harganya
 
-    const awalSenin = parseInt(results[0]["startDate"].split(' ')[0]);
-    let iteration = Math.floor((30 - awalSenin) / 7);
+    // TASK 2 : kirim ke fe ('kirim hasil response nya aja. kl udh ak coba integrasiin di fe')
+    // res.json(transformedData);
 
-    let detailWeekDayStartEnd = [];
-    for(let i = 0; i < 4; i++){
-
-      if(i == 3 && awalSenin + ((i + 1) * 7) > 31){ // jika lebih dari batas date normal
-        // paling rawan dapet tanggal lebih
-        detailWeekDayStartEnd.push({
-          start : awalSenin + ((i + 1) * 7) - 7,
-          end : parseInt(results[0]["endDate"].split(" ")[0]),
-        })
-
-      }else{
-        detailWeekDayStartEnd.push({
-          start : awalSenin + ((i + 1) * 7) - 7,
-          end : awalSenin + ((i + 1) * 7),
-        })
-      }
-    }
-    // console.log({awalSenin, iteration, detailWeekDayStartEnd})
-
-    let listPasar = results.map(file => file.location);
-    // Send response
-    res.json({
-      periode : "Minggu",
-      total_pasar : countFile,
-      startDate : results[0]["startDate"],
-      endDate : results[0]["endDate"],
-      detailWeekDayStartEnd, 
-      month : results[0]["startDate"].split(" ")[1],
-      listPasar,
-      markets: results,
-      averages: marketAverages
-    });
 
   } catch (error) {
     console.error('Error in getJsonContent:', error);
+    // Kirim response error yang lebih informatif
     res.status(500).json({
-      markets: [],
-      averages: {
-        weekly: {
-          kvh: Array(4).fill(0),
-          prices: Array(4).fill(0)
-        },
-        monthly: {
-          kvh: 0,
-          price: 0
-        },
-        commodities: []
-      },
+      type: "Minggu",
+      location: "Error",
+      startDate: "-",
+      endDate: "-",
+      countLength: 4,
+      detail_bulan: Array(4).fill("-"),
+      datas: KOMODITAS_LIST.map(komoditas => ({
+        Nama_pangan: komoditas,
+        details: Array(4).fill().map((_, i) => ({
+          title: `Minggu ${i + 1}`,
+          Avg_rupiah: 0,
+          Kvh: 0
+        }))
+      })),
+      weeklyAverageKVH: Array(4).fill(0),
       error: error.message
     });
   }
@@ -837,6 +690,9 @@ function calculateDetailedStats(jsonContent) {
   const weekCount = 4;
   const daysPerWeek = 7;
 
+  // Tambahkan perhitungan rata-rata pasar jika ada multiple data
+  const marketAverages = calculateAverageAcrossMarkets([jsonContent]);
+
   return {
     type: "Minggu",
     metadata: {
@@ -855,76 +711,33 @@ function calculateDetailedStats(jsonContent) {
             .filter(([day, price]) => {
               const dayNum = parseInt(day);
               const priceNum = parseFloat(String(price).replace(/\./g, ''));
-              return dayNum >= weekStart &&
-                dayNum <= weekEnd &&
-                priceNum > 0; // Hanya ambil harga yang lebih dari 0
+              return dayNum >= weekStart && dayNum <= weekEnd && priceNum > 0;
             })
             .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
 
-          // Hitung statistik
-          const avg = weekPrices.length > 0
-            ? weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length
-            : 0;
-
-          const squaredDiffs = weekPrices.map(price => Math.pow(price - avg, 2));
-          const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
-          const stdDev = weekPrices.length > 1
-            ? Math.sqrt(sumSquaredDiffs / (weekPrices.length - 1))
-            : 0;
-
-          const kvh = avg > 0 ? (stdDev / avg) * 100 : 0;
+          const avg = calculateRataRata(weekPrices);
+          const kvh = calculateWeeklyKvh(weekPrices); // Panggil fungsi KVH
 
           return {
             komoditas: item.Komoditas,
             harga_harian: weekPrices,
             statistik: {
-              avg: Math.round(avg),
-              sdv: parseFloat(stdDev.toFixed(2)),
-              kvh: parseFloat(kvh.toFixed(2))
+              avg: Math.round(parseFloat(avg)),
+              kvh: parseFloat(kvh)
             }
           };
         }),
-        averageKVH: parseFloat(
-          ((() => {
-            // Filter komoditas yang memiliki data valid untuk minggu ini
-            const validCommodities = data.filter(item => {
-              const weekPrices = Object.entries(item.harga_harian)
-                .filter(([day, price]) => {
-                  const dayNum = parseInt(day);
-                  const priceNum = parseFloat(String(price).replace(/\./g, ''));
-                  return dayNum >= weekStart &&
-                    dayNum <= weekEnd &&
-                    priceNum > 0;
-                });
-              return weekPrices.length > 0;
-            });
-
-            // Jika tidak ada komoditas valid, return 0
-            if (validCommodities.length === 0) return 0;
-
-            // Hitung KVH hanya untuk komoditas yang valid
-            const validKvhValues = validCommodities
-              .map(item => {
-                const weekPrices = Object.entries(item.harga_harian)
-                  .filter(([day, price]) => {
-                    const dayNum = parseInt(day);
-                    const priceNum = parseFloat(String(price).replace(/\./g, ''));
-                    return dayNum >= weekStart && dayNum <= weekEnd && priceNum > 0;
-                  })
-                  .map(([_, price]) => parseFloat(price.replace(/\./g, '')));
-
-                const avg = weekPrices.reduce((sum, price) => sum + price, 0) / weekPrices.length;
-                const squaredDiffs = weekPrices.map(price => Math.pow(price - avg, 2));
-                const sumSquaredDiffs = squaredDiffs.reduce((sum, diff) => sum + diff, 0);
-                const stdDev = Math.sqrt(sumSquaredDiffs / (weekPrices.length - 1));
-                return (stdDev / avg) * 100;
+        averageKVH: parseFloat(calculateWeeklyKvh(
+          data.flatMap(item => 
+            Object.entries(item.harga_harian)
+              .filter(([day, price]) => {
+                const dayNum = parseInt(day);
+                return dayNum >= weekStart && dayNum <= weekEnd;
               })
-              .filter(kvh => kvh > 0);
-
-            // Hitung rata-rata KVH dari nilai yang valid
-            return validKvhValues.reduce((sum, kvh) => sum + kvh, 0) / validKvhValues.length;
-          })()).toFixed(2)
-        )
+              .map(([_, price]) => parseFloat(price.replace(/\./g, '')))
+              .filter(price => price > 0)
+          )
+        ))
       };
     }),
     monthlyStats: data.map(item => {
@@ -952,7 +765,8 @@ function calculateDetailedStats(jsonContent) {
           kvh: parseFloat(kvh.toFixed(2))
         }
       };
-    })
+    }),
+    marketAverages: marketAverages // Tambahkan data rata-rata pasar
   };
 }
 
