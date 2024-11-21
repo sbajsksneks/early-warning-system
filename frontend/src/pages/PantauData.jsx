@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { cleanDatas, setDatas } from '../redux/redux-slicers/data.js';
+import LogoPemerintah from '../assets/cropped-icon-removebg-preview.png';
 
 export default function PantauData() {
 
@@ -1115,16 +1116,18 @@ export default function PantauData() {
 
 
     useEffect(() => {
-        
+
         // console.log({ rata_rata_kvh })
         console.log({ datapantau })
         if (datapantau == null) {
             window.location = '/datas';
         }
-        const rata_rata_kvh = HitungRataKVH(datapantau.datas, datapantau.detail_bulan.length);
+        // const rata_rata_kvh = HitungRataKVH(datapantau.datas, datapantau.detail_bulan.length);
+        const rata_rata_kvh = datapantau.averages.weekly["kvh"]
         setRataKVH(rata_rata_kvh);
+        console.log({ datapantau })
+        setDatasPantau(datapantau.averages.commodities);
 
-        setDatasPantau(datapantau);
     }, [])
 
     const handleDateFormat = (date) => {
@@ -1145,7 +1148,7 @@ export default function PantauData() {
     }
 
     const printLayar = async () => {
-        if (Object.keys(recomendations).length == datas.datas.length + 1) {
+        if (Object.keys(recomendations).length == datas.length + 1) {
             setIsPrint(true);
             // console.log("oke valid");
             // await new Promise(setTimeout())
@@ -1163,18 +1166,36 @@ export default function PantauData() {
                 {/* your content here */}
                 {datas ? (
                     <div className="flex flex-col gap-3 m-16 blue-dark">
+                        <div className="flex gap-3 items-center">
+                            <div>
+                                <img src={LogoPemerintah} className="w-[64px]" alt="" />
+                            </div>
+                            <div>
+                                <h1 className="text-[24px] font-bold">EarlyWarning<span className="yellow-wine">System</span></h1>
 
-                        <h1 className="text-[24px] font-bold">EarlyWarning<span className="yellow-wine">System</span></h1>
-
-                        <p className="py-2 max-w-2xl font-semibold text-sm uppercase">
-                            SISTEM PERINGATAN DINI KEBUTUHAN POKOK MASYARAKAT EARLY WARNING SYSTEM (ERWAS) KEPOKMAS
-                        </p>
+                                <p className="py-2 max-w-2xl font-semibold text-sm uppercase">
+                                    Sistem informasi Peringatan Kebutuhan Pokok Masyarakat (KEPOKMAS) <br />
+                                    Kabupaten Cirebon
+                                </p>
+                            </div>
+                        </div>
 
                         <div className="text-sm font-semibold">
-                            LOKASI PASAR : {datapantau.location}
+                            LOKASI PASAR : {datapantau.listPasar.length} Pasar | {datapantau.listPasar.map((_val, _i) => {
+                                let location = '';
+
+                                if (_i - datapantau.listPasar.length === -1) {
+                                    location += `${_val}`;
+                                } else {
+
+                                    location += `${_val}, `;
+                                }
+                                return location;
+                            })}
                         </div>
                         <div className="text-sm font-semibold">
-                            TANGGAL : {new Intl.DateTimeFormat('id-ID', {
+                            TANGGAL :  {datapantau.startDate} - {datapantau.endDate}
+                            {/* TANGGAL : {new Intl.DateTimeFormat('id-ID', {
                                 year: 'numeric',
                                 month: "long",
                                 day: "2-digit"
@@ -1184,14 +1205,14 @@ export default function PantauData() {
                                 year: 'numeric',
                                 month: "long",
                                 day: "2-digit"
-                            }).format(handleDateFormat(parseCustomDate(datas.endDate)))}
+                            }).format(handleDateFormat(parseCustomDate(datas.endDate)))} */}
                         </div>
                         <div className="text-sm font-semibold">
-                            PERIODE : {datas && datas.type == "Minggu" ? "Mingguan" : "Bulanan"}
+                            PERIODE : {datas && datapantau.periode == "Minggu" ? "Mingguan" : "Bulanan"}
                         </div>
 
                         <p className="font-bold no-print">Berikan Rekomendasi Aksi Yang Tepat Menurut Analisa anda</p>
-                        <p className="no-print text-red-600"> <span className="text-red-600">* </span>lengkapi semua aksi rekomendasi untuk mengeprint.</p>
+                        <p className="no-print text-red-600 font-semibold"> <span className="text-red-600">* </span>lengkapi semua aksi rekomendasi untuk mengeprint.</p>
 
 
                         <table className="w-full min-w-screen rounded-md" >
@@ -1205,10 +1226,11 @@ export default function PantauData() {
                                 <td className="border border-gray-400 px-3 py-2">No.</td>
                                 <td className="border border-gray-400 px-3 py-2">Jenis Bahan Pokok</td>
 
-                                {Array.from({ length: datas.countLength }).map((_val, _i) => (
+                                {Array.from({ length: datapantau.detailWeekDayStartEnd.length }).map((_val, _i) => (
                                     <>
-                                        <td className="border border-gray-400 px-3 py-2">{datas.type} {_i + 1} Bulan {datas.detail_bulan[_i]}- AVG (Rp.)</td>
-                                        <td className="border border-gray-400 px-3 py-2">{datas.type} {_i + 1} Bulan {datas.detail_bulan[_i]}- Kvh</td>
+                                        <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) AVG (Rp.)</td>
+                                        <td className="border border-gray-400 px-3 py-2 space-nowrap">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) - Kvh</td>
+                                        {/* <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} Bulan {datapantau.month}- Kvh</td> */}
                                     </>
                                 ))}
                                 {/* <th className="border border-gray-400 px-3 py-2">Minggu 2 - AVG (Rp.)</th>
@@ -1216,8 +1238,8 @@ export default function PantauData() {
                                 <td className="border border-gray-400 px-3 py-2 space-nowrap">Rekomendasi Aksi</td>
                             </thead>
                             <tbody className="text-xs lg:text-xs font-medium border-2 border-black">
-                                {datas.datas.length > 0 ? (
-                                    datas.datas.map((val, _i) => {
+                                {datas.length > 0 ? (
+                                    datas.map((val, _i) => {
                                         // !_i < datas.countLength ? return null :  return true;
                                         return (
                                             <tr className={_i % 2 == 0 ? "bg-white1" : "bg-white2"}>
@@ -1225,19 +1247,20 @@ export default function PantauData() {
                                                     {_i + 1}
                                                 </th>
                                                 <th className="border-[#073B4C] border px-6 py-3 ">
-                                                    {datas.datas[_i]['Nama_pangan']}
+                                                    {datas[_i]['name']}
                                                 </th>
-                                                {Array.from({ length: datas.datas[_i]['details'].length }).map((_val, __i) => (
+                                                {Array.from({ length: datas[_i]['weekly']['kvh'].length }).map((_val, __i) => (
 
-                                                    <HandleColorTd price={datas.datas[_i]['details'][__i]['Avg_rupiah']} kvh={datas.datas[_i]['details'][__i]['Kvh']} />
+                                                    // <HandleColorTd price={datas[_i]['weekly'][__i]['prices']} kvh={datas[_i]['weekly'][__i]['kvh']} />
+                                                    <HandleColorTd price={datas[_i]['weekly']['prices'][__i]} kvh={datas[_i]['weekly']['kvh'][__i]} />
 
                                                 ))}
 
                                                 <td className="px-6 py-3 whitespace-nowrap border-[#073B4C] border text-sm">
                                                     {isPrint ? (
-                                                        recomendations[val.Nama_pangan]
+                                                        recomendations[val.name]
                                                     ) : (
-                                                        <input type="text" className="border-[#073B4C] border bg-white text-gray rounded-sm text-xs py-2 px-3 min-w-[250px]" onChange={() => handleInputChange(event, val.Nama_pangan)} />
+                                                        <input type="text" className="border-[#073B4C] border bg-white text-gray rounded-sm text-xs py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, val.name)} />
                                                     )}
                                                 </td>
                                             </tr>
@@ -1245,7 +1268,7 @@ export default function PantauData() {
                                     })
                                 ) : null}
 
-                                <tr className={datas.datas.length % 2 == 0 ? "bg-white1" : "bg-white2"}>
+                                <tr className={datas.length % 2 == 0 ? "bg-white1" : "bg-white2"}>
                                     <td colSpan={2} className="px-6 uppercase font-bold border-[#073B4C] border py-2 whitespace-nowrap">
                                         KVH RATA RATA {datas.type == "Minggu" ? "Mingguan" : "Bulanan"}
                                     </td>
@@ -1260,24 +1283,37 @@ export default function PantauData() {
                                         {isPrint ? (
                                             recomendations["rata_rata"]
                                         ) : (
-
-                                            <input type="text" className="text-xs border-[#073B4C] border bg-white text-gray rounded-sm py-2 px-3 min-w-[250px]" onChange={() => handleInputChange(event, "rata_rata")} />
+                                            <input type="text" className="text-xs border-[#073B4C] border bg-white text-gray rounded-sm py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, "rata_rata")} />
                                         )}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <div className="font-semibold">
+                        <div className="font-semibold flex-col flex gap-2">
 
                             <div className="mt-3">Keterangan:</div>
-                            <div >AVG = Average / Rata - Rata Harga</div>
-                            <div>KVH = Koefisiensi Variasi Harga</div>
+                            <div>
+                                <div >AVG = Average / Rata - Rata Harga</div>
+                                <div>KVH = Koefisiensi Variasi Harga</div>
+                            </div>
+                            <div className="flex gap-3 text-sm items-center">
+                                <span className="w-4 h-4 bg-red-600 rounded-full"></span>
+                                <span>Merah menunjukan KVH lebih besar dari 6%</span>
+                            </div>
+                            <div className="flex gap-3 text-sm items-center">
+                                <span className="w-4 h-4 bg-[#F4BB00]  rounded-full"></span>
+                                <span>Kuning menunjukan KVH lebih besar dari 3%</span>
+                            </div>
+                            <div className="flex gap-3 text-sm items-center">
+                                <span className="w-4 h-4 bg-[#20E45B]  rounded-full"></span>
+                                <span>Hijau menunjukan KVH kurang dari 3%</span>
+                            </div>
                         </div>
 
                         <Link to={"/datas"} className="text-blue-600 font-semibold underline">Kembali Ke Home</Link>
 
-                        {datas && Object.keys(recomendations).length == datas.datas.length + 1 ? (
+                        {datas && Object.keys(recomendations).length == datas.length + 1 ? (
                             <button onClick={printLayar} type="submit" className="no-print flex mt-3 font-semibold w-fit gap-2 rounded-md hover:opacity-90 active:opacity-80 blue-dark bg-yellow-wine px-3 py-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 16h4c.55 0 1-.45 1-1v-5h1.59c.89 0 1.34-1.08.71-1.71L12.71 3.7a.996.996 0 0 0-1.41 0L6.71 8.29c-.63.63-.19 1.71.7 1.71H9v5c0 .55.45 1 1 1m-4 2h12c.55 0 1 .45 1 1s-.45 1-1 1H6c-.55 0-1-.45-1-1s.45-1 1-1" /></svg>
                                 Submit dan Pantau Data
@@ -1319,7 +1355,7 @@ function HandleColorTd({ price, kvh }) {
                 <td className="border-[#073B4C] border px-6 py-4 whitespace-nowrap">
                     RP. {Math.floor(price)}
                 </td>
-                <td className="border-[#073B4C] bg-[#20E45B] border px-6 py-4 whitespace-nowrap">
+                <td className="border-[#073B4C] bg-[#20E45B] border px-[40px] py-4 whitespace-nowrap">
                     {kvh}%
                 </td>
             </>

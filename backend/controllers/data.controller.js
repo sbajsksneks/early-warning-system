@@ -2,6 +2,7 @@ import xlsx from 'xlsx';
 import fs from 'fs/promises';
 import path from 'path';
 import { readFile } from 'fs';
+import { start } from 'repl';
 
 // Buat folder untuk menyimpan file JSON jika belum ada
 const JSON_DIR = path.join(process.cwd(), 'uploads', 'json');
@@ -736,8 +737,38 @@ export const getJsonContent = async (req, res) => {
     // Calculate market averages
     const marketAverages = calculateMarketAverages(results);
 
+    const awalSenin = parseInt(results[0]["startDate"].split(' ')[0]);
+    let iteration = Math.floor((30 - awalSenin) / 7);
+
+    let detailWeekDayStartEnd = [];
+    for(let i = 0; i < 4; i++){
+
+      if(i == 3 && awalSenin + ((i + 1) * 7) > 31){ // jika lebih dari batas date normal
+        // paling rawan dapet tanggal lebih
+        detailWeekDayStartEnd.push({
+          start : awalSenin + ((i + 1) * 7) - 7,
+          end : parseInt(results[0]["endDate"].split(" ")[0]),
+        })
+
+      }else{
+        detailWeekDayStartEnd.push({
+          start : awalSenin + ((i + 1) * 7) - 7,
+          end : awalSenin + ((i + 1) * 7),
+        })
+      }
+    }
+    // console.log({awalSenin, iteration, detailWeekDayStartEnd})
+
+    let listPasar = results.map(file => file.location);
     // Send response
     res.json({
+      periode : "Minggu",
+      total_pasar : countFile,
+      startDate : results[0]["startDate"],
+      endDate : results[0]["endDate"],
+      detailWeekDayStartEnd, 
+      month : results[0]["startDate"].split(" ")[1],
+      listPasar,
       markets: results,
       averages: marketAverages
     });
