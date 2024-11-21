@@ -68,19 +68,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "8000",
@@ -121,19 +125,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "18000",
@@ -174,19 +182,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "17333.33"
+          "rata_rata": "17333.33",
+          "kvh": "2.98"
         }
       },
       "Terendah": "17000",
@@ -227,19 +239,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "140000",
@@ -280,19 +296,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "30714.29"
+          "rata_rata": "30714.29",
+          "kvh": "4.08"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "1.70"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "35000.00"
+          "rata_rata": "35000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "34666.67"
+          "rata_rata": "34666.67",
+          "kvh": "1.49"
         }
       },
       "Terendah": "30000",
@@ -333,19 +353,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "70000.00"
+          "rata_rata": "70000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "70000",
@@ -386,19 +410,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "26500.00"
+          "rata_rata": "26500.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "26285.71"
+          "rata_rata": "26285.71",
+          "kvh": "1.02"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "26000.00"
+          "rata_rata": "26000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "26000.00"
+          "rata_rata": "26000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "26000",
@@ -439,19 +467,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "12083.33"
+          "rata_rata": "12083.33",
+          "kvh": "1.69"
         }
       },
       "Terendah": "12000",
@@ -492,19 +524,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "2833.33"
+          "rata_rata": "2833.33",
+          "kvh": "9.11"
         }
       },
       "Terendah": "2500",
@@ -545,19 +581,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "33666.67"
+          "rata_rata": "33666.67",
+          "kvh": "2.43"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "32000",
@@ -598,19 +638,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "12000",
@@ -651,19 +695,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "35000.00"
+          "rata_rata": "35000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "32142.86"
+          "rata_rata": "32142.86",
+          "kvh": "8.31"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "30000",
@@ -704,19 +752,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "15428.57"
+          "rata_rata": "15428.57",
+          "kvh": "9.80"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "15142.86"
+          "rata_rata": "15142.86",
+          "kvh": "5.94"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "15714.29"
+          "rata_rata": "15714.29",
+          "kvh": "3.11"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "16333.33"
+          "rata_rata": "16333.33",
+          "kvh": "3.16"
         }
       },
       "Terendah": "14000",
@@ -757,19 +809,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "47142.86"
+          "rata_rata": "47142.86",
+          "kvh": "6.87"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "50000.00"
+          "rata_rata": "50000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "50000.00"
+          "rata_rata": "50000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "50000.00"
+          "rata_rata": "50000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "42000",
@@ -810,19 +866,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "25714.29"
+          "rata_rata": "25714.29",
+          "kvh": "7.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "22857.14"
+          "rata_rata": "22857.14",
+          "kvh": "6.88"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "20857.14"
+          "rata_rata": "20857.14",
+          "kvh": "9.36"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "18666.67"
+          "rata_rata": "18666.67",
+          "kvh": "12.98"
         }
       },
       "Terendah": "16000",
@@ -863,19 +923,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "2966.67"
+          "rata_rata": "2966.67",
+          "kvh": "1.74"
         }
       },
       "Terendah": "2900",
@@ -916,19 +980,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "18000",
@@ -969,19 +1037,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "18833.33"
+          "rata_rata": "18833.33",
+          "kvh": "1.37"
         }
       },
       "Terendah": "18500",
@@ -1022,19 +1094,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "19666.67"
+          "rata_rata": "19666.67",
+          "kvh": "1.31"
         }
       },
       "Terendah": "19500",
@@ -1075,19 +1151,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "170000",
@@ -1128,19 +1208,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "11666.67"
+          "rata_rata": "11666.67",
+          "kvh": "8.85"
         }
       },
       "Terendah": "11000",
@@ -1181,19 +1265,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "7000",
@@ -1234,19 +1322,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "12083.33"
+          "rata_rata": "12083.33",
+          "kvh": "1.69"
         }
       },
       "Terendah": "12000",
@@ -1287,19 +1379,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "21333.33"
+          "rata_rata": "21333.33",
+          "kvh": "4.84"
         }
       },
       "Terendah": "20000",
@@ -1340,19 +1436,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "32000",
@@ -1393,19 +1493,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "16571.43"
+          "rata_rata": "16571.43",
+          "kvh": "5.89"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "16285.71"
+          "rata_rata": "16285.71",
+          "kvh": "4.64"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "16000",
@@ -1446,19 +1550,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "22.13"
         }
       },
       "Terendah": "10000",
@@ -1499,19 +1607,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "19333.33"
+          "rata_rata": "19333.33",
+          "kvh": "5.34"
         }
       },
       "Terendah": "18000",
@@ -1552,19 +1664,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "22.13"
         }
       },
       "Terendah": "5000",
@@ -1605,19 +1721,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "8666.67"
+          "rata_rata": "8666.67",
+          "kvh": "5.96"
         }
       },
       "Terendah": "8000",
@@ -1658,19 +1778,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "12666.67"
+          "rata_rata": "12666.67",
+          "kvh": "16.31"
         }
       },
       "Terendah": "10000",
@@ -1711,19 +1835,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "0"
+          "rata_rata": "0",
+          "kvh": "0"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0"
         }
       },
       "Terendah": "14000",
@@ -1764,19 +1892,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "30.98"
         }
       },
       "Terendah": "12000",
@@ -1817,19 +1949,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "18857.14"
+          "rata_rata": "18857.14",
+          "kvh": "12.03"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "16428.57"
+          "rata_rata": "16428.57",
+          "kvh": "6.90"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "15428.57"
+          "rata_rata": "15428.57",
+          "kvh": "5.10"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "14000",
@@ -1870,19 +2006,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "24428.57"
+          "rata_rata": "24428.57",
+          "kvh": "3.99"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "4.17"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "25857.14"
+          "rata_rata": "25857.14",
+          "kvh": "7.87"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "28000.00"
+          "rata_rata": "28000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "22000",
@@ -1923,19 +2063,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "38000.00"
+          "rata_rata": "38000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "38000.00"
+          "rata_rata": "38000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "38000.00"
+          "rata_rata": "38000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "38000.00"
+          "rata_rata": "38000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "38000",
@@ -1976,19 +2120,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "48333.33"
+          "rata_rata": "48333.33",
+          "kvh": "37.39"
         }
       },
       "Terendah": "25000",
@@ -2029,19 +2177,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "42000.00"
+          "rata_rata": "42000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "42000.00"
+          "rata_rata": "42000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "42000.00"
+          "rata_rata": "42000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "42000.00"
+          "rata_rata": "42000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "42000",
@@ -2082,19 +2234,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "116666.67"
+          "rata_rata": "116666.67",
+          "kvh": "4.43"
         }
       },
       "Terendah": "110000",
@@ -2135,19 +2291,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "30000",
@@ -2188,19 +2348,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "32000",
@@ -2241,19 +2405,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "14333.33"
+          "rata_rata": "14333.33",
+          "kvh": "3.60"
         }
       },
       "Terendah": "14000",
@@ -2294,19 +2462,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "13000",
@@ -2347,19 +2519,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Oktober",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Oktober",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Oktober",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Oktober",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "15000",

@@ -771,45 +771,92 @@ function calculateDetailedStats(jsonContent) {
 }
 
 // Helper function untuk menghitung rata-rata antar pasar
-function calculateAverageAcrossMarkets(allData) {
+export function calculateAverageAcrossMarkets(allData) {
   if (allData.length === 0) return null;
 
   const firstData = allData[0];
-  const result = {
-    metadata: { ...firstData.metadata },
-    data: []
-  };
-
-  // Untuk setiap komoditas
-  firstData.data.forEach(item => {
-    const komoditas = item.Komoditas;
-    const avgData = {
-      Komoditas: komoditas,
-      harga_harian: {},
-      Terendah: "0",
-      Tertinggi: "0",
-      "Rata-rata": "0"
-    };
-
-    // Hitung rata-rata harian
-    Object.keys(item.harga_harian).forEach(day => {
-      const prices = allData
-        .map(marketData => {
-          const komoditasData = marketData.data.find(d => d.Komoditas === komoditas);
-          return parseFloat(komoditasData?.harga_harian[day]?.replace(/\./g, '') || "0");
+  
+  // Transform data untuk setiap pasar
+  const marketData = allData.map(data => {
+    return {
+      location: data.metadata.lokasi_pasar,
+      datas: data.data.map(item => ({
+        Nama_pangan: item.Komoditas,
+        details: Array(4).fill().map((_, weekIndex) => {
+          const weekNum = weekIndex + 1;
+          const weekData = item.harga_mingguan[`minggu_${weekNum}`] || {};
+          return {
+            title: `Minggu ${weekNum}`,
+            Avg_rupiah: parseFloat(weekData.rata_rata || 0),
+            Kvh: parseFloat(weekData.kvh || 0)
+          };
         })
-        .filter(price => price > 0);
-
-      if (prices.length > 0) {
-        const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
-        avgData.harga_harian[day] = avg.toFixed(2);
-      }
-    });
-
-    result.data.push(avgData);
+      })),
+      weeklyAverageKVH: Array(4).fill().map((_, weekIndex) => {
+        const weekNum = weekIndex + 1;
+        const weekKvhs = data.data
+          .map(item => parseFloat(item.harga_mingguan[`minggu_${weekNum}`]?.kvh || 0))
+          .filter(kvh => kvh > 0);
+        
+        return weekKvhs.length > 0
+          ? parseFloat((weekKvhs.reduce((a, b) => a + b, 0) / weekKvhs.length).toFixed(2))
+          : 0;
+      })
+    };
   });
 
-  return result;
+  return {
+    type: "Minggu",
+    startDate: firstData.metadata.start.split(" ").slice(0, 2).join("-"),
+    endDate: firstData.metadata.end.split(" ").slice(0, 2).join("-"),
+    countLength: 4,
+    detail_bulan: Array(4).fill(firstData.metadata.bulan),
+    pasar: marketData,
+    ringkasan: {
+      rata_rata_pasar: KOMODITAS_LIST.map(komoditas => ({
+        Nama_pangan: komoditas,
+        details: Array(4).fill().map((_, weekIndex) => {
+          const weekNum = weekIndex + 1;
+          const allMarketPrices = [];
+          const allMarketKvhs = [];
+
+          allData.forEach(data => {
+            const item = data.data.find(d => d.Komoditas === komoditas);
+            if (item && item.harga_mingguan[`minggu_${weekNum}`]) {
+              const weekData = item.harga_mingguan[`minggu_${weekNum}`];
+              allMarketPrices.push(parseFloat(weekData.rata_rata || 0));
+              allMarketKvhs.push(parseFloat(weekData.kvh || 0));
+            }
+          });
+
+          const validPrices = allMarketPrices.filter(p => p > 0);
+          const validKvhs = allMarketKvhs.filter(k => k > 0);
+
+          return {
+            title: `Minggu ${weekNum}`,
+            Avg_rupiah: validPrices.length > 0
+              ? Math.round(validPrices.reduce((a, b) => a + b, 0) / validPrices.length)
+              : 0,
+            Kvh: validKvhs.length > 0
+              ? parseFloat((validKvhs.reduce((a, b) => a + b, 0) / validKvhs.length).toFixed(2))
+              : 0
+          };
+        })
+      })),
+      weeklyAverageKVH: Array(4).fill().map((_, weekIndex) => {
+        const weekNum = weekIndex + 1;
+        const allKvhs = allData.flatMap(data => 
+          data.data
+            .map(item => parseFloat(item.harga_mingguan[`minggu_${weekNum}`]?.kvh || 0))
+            .filter(kvh => kvh > 0)
+        );
+
+        return allKvhs.length > 0
+          ? parseFloat((allKvhs.reduce((a, b) => a + b, 0) / allKvhs.length).toFixed(2))
+          : 0;
+      })
+    }
+  };
 }
 
 // Helper function untuk menghitung harga terendah
