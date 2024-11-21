@@ -635,7 +635,7 @@ export const getJsonContent = async (req, res) => {
     // TASK 1 : gmn caranya dari array yang ada di variabel result bisa dihitung rata - rata KVH nya dan harganya
 
     // TASK 2 : kirim ke fe ('kirim hasil response nya aja. kl udh ak coba integrasiin di fe')
-    // res.json(transformedData);
+    res.json(transformedData);
 
 
   } catch (error) {
