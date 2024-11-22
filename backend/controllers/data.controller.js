@@ -532,6 +532,7 @@ export const getJsonContent = async (req, res) => {
 
     let results = [];
     let countFile = 0;
+    let transformedData;
 
     for (const fileName of files) {
 
@@ -548,7 +549,7 @@ export const getJsonContent = async (req, res) => {
       }
 
       // Transform data untuk format yang dibutuhkan frontend
-      const transformedData = {
+      transformedData = {
         type: "Minggu",
         location: jsonContent.metadata.lokasi_pasar,
         startDate: jsonContent.metadata.start,
@@ -609,17 +610,176 @@ export const getJsonContent = async (req, res) => {
 
       countFile++;
       results.push(transformedData);
-      console.log(`Data ${countFile} : ${transformedData.datas[0]}`)
+      // console.log(`Data ${countFile} : ${transformedData.datas[0]}`)
       // console.log('Transformed data:', transformedData);
     }
 
-    console.log({ results, countFile })
-    // results isinya array dari transformedData
+    const awalSenin = parseInt(results[0]["startDate"].split(' ')[0]);
+    let detailWeekDayStartEnd = [];
+    let kvh_weekly = [];
 
-    // TASK 1 : gmn caranya dari array yang ada di variabel result bisa dihitung rata - rata KVH nya dan harganya
+    for(let i = 0; i < 4; i++){
+      if(i == 3 && awalSenin + ((i + 1) * 7) > 31){ // jika lebih dari batas date normal
+        // paling rawan dapet tanggal lebih
+        detailWeekDayStartEnd.push({
+          start : awalSenin + ((i + 1) * 7) - 7,
+          end : parseInt(results[0]["endDate"].split(" ")[0]),
+        })
+      }else{
+        detailWeekDayStartEnd.push({
+          start : awalSenin + ((i + 1) * 7) - 7,
+          end : awalSenin + ((i + 1) * 7),
+        })
+      }
+    }
 
-    // TASK 2 : kirim ke fe ('kirim hasil response nya aja. kl udh ak coba integrasiin di fe')
-    res.json(transformedData);
+    let listPasar = results.map(file => file.location);
+
+
+    //---
+    let komoditas = ["Beras Medium", "Beras Premium", "Bawang Merah", "Kacang Kedelai Lokal", "Kacang Kedelai Impor", "Cabe Merah Besar", "Cabe Merah Keriting", "Cabe Rawit Merah", "Cabe Rawit Hijau", "Minyak Goreng Sawit", "Tepung Terigu", "Gula Pasir", "Daging Ayam ras", "Telur Ayam Ras", "Daging Sapi", "Ikan Bandeng"];
+
+    let key = {
+      "Beras Medium" : {
+        harga : [0, 0, 0, 0],
+        kvh : [0, 0, 0, 0]
+      },
+      "Beras Premium" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,]
+      },
+      "Bawang Merah" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Kacang Kedelai Lokal" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Kacang Kedelai Impor" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Cabe Merah Besar" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Cabe Merah Keriting" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Cabe Rawit Merah" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Cabe Rawit Hijau" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Minyak Goreng Sawit" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Tepung Terigu" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Gula Pasir" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Daging Ayam ras" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Telur Ayam Ras" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Daging Sapi" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+      "Ikan Bandeng" : {
+        harga : [0,0,0,0],
+        kvh : [0,0,0,0]
+      },
+    }
+
+    for (let i = 0; i < results.length; i++) { // looping pasar
+      for(let j = 0; j < results[i]['datas'].length; j++){ // looping komditas j == 16
+        console.log('ww')
+
+        // let harga = 0;
+
+        for (let k = 0; k < results[i]['datas'][j]['details'].length; k++) { // looping 4 isi komuditas
+          const singleData = results[i]['datas'][j]['details'][k];
+          key[komoditas[j]]['harga'][k] += singleData.Avg_rupiah;
+          key[komoditas[j]]['kvh'][k] += singleData.Kvh;
+          
+          // console.log(key[komoditas[j]]['harga'][k])
+        }
+      }
+    }
+
+    let lastResult = [
+
+    ]
+    for(let i = 0; i < komoditas.length; i++){ // komoditas
+      let prices = [];
+      let kvh_s = [];
+      for (let j = 0; j < key[komoditas[i]]['harga'].length; j++) { // iteration
+        // const element = array[j];
+        console.log(key[komoditas[i]]['harga'][j]) 
+        console.log(key[komoditas[i]]['kvh'][j]) 
+        const harga = key[komoditas[i]]['harga'][j] / results.length ; // banyak pasar
+        const kvh = key[komoditas[i]]['kvh'][j] / results.length; 
+        // console.log({harga, kvh})
+        prices.push(harga);
+        kvh_s.push(kvh);
+        
+        
+      }
+
+      lastResult.push({
+        name : komoditas[i],
+        prices : [
+          ...prices
+        ],
+        kvh : [
+          ...kvh_s
+        ]
+      })
+    };
+
+    for(let i = 0; i < 4; i++){
+      let kvh_week = 0;
+      for(let j = 0; j < komoditas.length; j++){
+        if(typeof key[komoditas[j]]['kvh'][i] == 'number' && key[komoditas[j]]['kvh'][i] != null &&  !isNaN(key[komoditas[j]]['kvh'][i])){
+
+          kvh_week += typeof key[komoditas[j]]['kvh'][i] == 'number' ? key[komoditas[j]]['kvh'][i] : 0;
+    
+        }
+      }
+
+      kvh_weekly.push(kvh_week / komoditas.length)
+    }
+
+ 
+    res.json({
+      periode : "Minggu",
+      total_pasar : countFile,
+      startDate : results[0]["startDate"],
+      endDate : results[0]["endDate"],
+      detailWeekDayStartEnd, 
+      month : results[0]["startDate"].split(" ")[1],
+      listPasar,
+      markets: results,
+      average : lastResult,
+      kvh_weekly,
+      results
+      // averages: marketAverages
+    });
 
 
   } catch (error) {

@@ -1123,10 +1123,10 @@ export default function PantauData() {
             window.location = '/datas';
         }
         // const rata_rata_kvh = HitungRataKVH(datapantau.datas, datapantau.detail_bulan.length);
-        const rata_rata_kvh = datapantau.averages.weekly["kvh"]
+        const rata_rata_kvh = datapantau.kvh_weekly
         setRataKVH(rata_rata_kvh);
         console.log({ datapantau })
-        setDatasPantau(datapantau.averages.commodities);
+        setDatasPantau(datapantau.average);
 
     }, [])
 
@@ -1229,7 +1229,7 @@ export default function PantauData() {
                                 {Array.from({ length: datapantau.detailWeekDayStartEnd.length }).map((_val, _i) => (
                                     <>
                                         <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) AVG (Rp.)</td>
-                                        <td className="border border-gray-400 px-3 py-2 space-nowrap">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) - Kvh</td>
+                                        <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) - Kvh</td>
                                         {/* <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} Bulan {datapantau.month}- Kvh</td> */}
                                     </>
                                 ))}
@@ -1249,10 +1249,9 @@ export default function PantauData() {
                                                 <th className="border-[#073B4C] border px-6 py-3 ">
                                                     {datas[_i]['name']}
                                                 </th>
-                                                {Array.from({ length: datas[_i]['weekly']['kvh'].length }).map((_val, __i) => (
-
+                                                {Array.from({ length: datas[_i]['kvh'].length }).map((_val, __i) => (
                                                     // <HandleColorTd price={datas[_i]['weekly'][__i]['prices']} kvh={datas[_i]['weekly'][__i]['kvh']} />
-                                                    <HandleColorTd price={datas[_i]['weekly']['prices'][__i]} kvh={datas[_i]['weekly']['kvh'][__i]} />
+                                                    <HandleColorTd price={datas[_i]['prices'][__i]} kvh={datas[_i]['kvh'][__i]} />
 
                                                 ))}
 
@@ -1333,8 +1332,8 @@ function HandleColorTd({ price, kvh }) {
                 <td className="border-[#073B4C] border px-6 py-4 whitespace-nowrap">
                     RP. {Math.floor(price)}
                 </td>
-                <td className="border-[#073B4C] bg-[#FF2C2C] border px-6 py-4 whitespace-nowrap">
-                    {kvh}%
+                <td className="border-[#073B4C] bg-[#FF2C2C] border px-4 py-4 whitespace-nowrap">
+                    {kvh ? kvh.toFixed(2) : 0}%
                 </td>
             </>
         )
@@ -1344,8 +1343,8 @@ function HandleColorTd({ price, kvh }) {
                 <td className="border-[#073B4C] border px-6 py-4 whitespace-nowrap">
                     RP. {Math.floor(price)}
                 </td>
-                <td className="border-[#073B4C] bg-[#F4BB00] border px-6 py-4 whitespace-nowrap">
-                    {kvh}%
+                <td className="border-[#073B4C] bg-[#F4BB00] border px-4 py-4 whitespace-nowrap">
+                    {kvh ? kvh.toFixed(2) : 0}%
                 </td>
             </>
         )
@@ -1355,8 +1354,8 @@ function HandleColorTd({ price, kvh }) {
                 <td className="border-[#073B4C] border px-6 py-4 whitespace-nowrap">
                     RP. {Math.floor(price)}
                 </td>
-                <td className="border-[#073B4C] bg-[#20E45B] border px-[40px] py-4 whitespace-nowrap">
-                    {kvh}%
+                <td className="border-[#073B4C] bg-[#20E45B] border px-4 py-4 whitespace-nowrap">
+                    { kvh ? kvh.toFixed(2) : 0}%
                 </td>
             </>
         )
@@ -1402,19 +1401,19 @@ function HandleColorAverage({ kvh }) {
     if (kvh > 6) {
         return (
             <td colSpan={2} className="px-6 uppercase bg-[#FF2C2C] font-bold border-[#073B4C] border py-2 whitespace-nowrap">
-                {kvh}%
+                {kvh ? kvh.toFixed(2) : 0}%
             </td>
         )
     } else if (kvh > 3) {
         return (
             <td colSpan={2} className="px-6 uppercase bg-[#F4BB00] font-bold border-[#073B4C] border py-2 whitespace-nowrap">
-                {kvh}%
+                {kvh ? kvh.toFixed(2) : 0}%
             </td>
         )
     } else {
         return (
             <td colSpan={2} className="px-6 uppercase bg-[#20E45B] font-bold border-[#073B4C] border py-2 whitespace-nowrap">
-                {kvh}%
+                {kvh ? kvh.toFixed(2) : 0}%
             </td>
         )
     }

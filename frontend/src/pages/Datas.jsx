@@ -124,6 +124,7 @@ export default function Datas() {
                             <tr className="w-full text-white bg-blue-dark rounded-md">
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">No</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">File Date</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Total Pasar</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Lokasi Pasar</th>
 
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
@@ -136,6 +137,7 @@ export default function Datas() {
                                     let date = key[0]; // is date
                                     let location = '';
                                     let ArrayOfFiles = [];
+                                    let ind = 0;
                                     key[1].map((_value, _i) => {
 
                                         if(_i - key[1].length === -1){
@@ -146,6 +148,7 @@ export default function Datas() {
                                             location += `${_value.location}, `;
                                         }
 
+                                        ind++;
                                         ArrayOfFiles.push(_value.fileName)
                                     })
 
@@ -158,10 +161,15 @@ export default function Datas() {
                                             <td className="px-6 py-3 whitespace-nowrap">
                                                 {date}
                                             </td>
-                                            <td className="px-6 py-3 whitespace-nowrap">
+                                            <td className="px-6 py-3 ">
+                                                {/* {dataFile[_i]['extension']} */}
+                                                {ind}
+                                            </td>
+                                            <td className="px-6 py-3 ">
                                                 {/* {dataFile[_i]['extension']} */}
                                                 {location}
                                             </td>
+                                            
 
                                             <td className="px-6 py-3 whitespace-nowrap">
                                                 {/* {String(dataFile[_i]['ketersedian'])} */}
