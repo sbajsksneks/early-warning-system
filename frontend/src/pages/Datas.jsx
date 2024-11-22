@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
-import {cleanDatas, setDatas} from '../redux/redux-slicers/data.js';
+import { cleanDatas, setDatas } from '../redux/redux-slicers/data.js';
 
 export default function Datas() {
     const [startDate, setStartDate] = useState(null);
@@ -15,27 +15,27 @@ export default function Datas() {
     const [isLoading, setLoading] = useState(false);
     const [modal, setModal] = useState(false);
     const [dataFile, setDataFile] = useState(null);
-    const {datapantau} = useSelector((state) => state.dataweb);
+    const { datapantau } = useSelector((state) => state.dataweb);
     const dispacth = useDispatch();
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState('');
 
     useEffect(() => {
         fetchDataFiles();
-        console.log({datapantau})
+        console.log({ datapantau })
         dispacth(cleanDatas());
     }, [selectedDate])
 
     const fetchDataFiles = async () => {
         try {
-            const url = selectedDate 
+            const url = selectedDate
                 ? `/api/data/getdatas?date=${selectedDate}`
                 : "/api/data/getdatas";
-            
+
             const res = await fetch(url);
             const resdata = await res.json();
             console.log({ resdata })
-            if(!res.ok){
+            if (!res.ok) {
                 setDataFile(null);
                 return;
             }
@@ -50,11 +50,11 @@ export default function Datas() {
             setModal(true);
             // const res = await fetch(`/api/data/content/${filesname}`);
             const res = await fetch(`/api/data/contents`, {
-                method : "POST",
-                headers : {
-                    "Content-Type" : "application/json",
-                }, 
-                body : JSON.stringify({files : [...filesname]})
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ files: [...filesname] })
             });
             const data = await res.json();
             // console.log({data})
@@ -90,13 +90,14 @@ export default function Datas() {
             ) : null}
 
             <div className="flex bg-main">
-                <Side />
-
+                <div className="md:flex hidden bg-main min-h-[80vh] w-[20%] font-semibold border-r pt-5 flex-col text-sm justify-between">
+                    <Side />
+                </div>
                 {/* your content here */}
-                <div className="flex flex-col gap-3 my-8 mx-16 max-w-4xl blue-dark pb-12">
+                <div className="flex flex-col gap-3 md:my-8 m-8 md:mx-16 max-w-4xl blue-dark pb-12">
 
-                    <h1 className="text-2xl font-bold">Data Akomoditas</h1>
-                    <h1 className=" font-medium">Tekan Action Pantau data untuk melihat detail</h1>
+                    <h1 className="text-[24px] md:text-2xl font-bold">Data Akomoditas</h1>
+                    <h1 className=" font-medium text-[16px] text-sm">Tekan Action Pantau data untuk melihat detail</h1>
                     <div className="flex items-center gap-4">
                         {/* <div className="flex flex-col"> */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 36 36"><path fill="currentColor" d="M32.25 6h-4v3a2.2 2.2 0 1 1-4.4 0V6H12.2v3a2.2 2.2 0 0 1-4.4 0V6h-4A1.78 1.78 0 0 0 2 7.81v22.38A1.78 1.78 0 0 0 3.75 32h28.5A1.78 1.78 0 0 0 34 30.19V7.81A1.78 1.78 0 0 0 32.25 6M10 26H8v-2h2Zm0-5H8v-2h2Zm0-5H8v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Zm6 10h-2v-2h2Zm0-5h-2v-2h2Zm0-5h-2v-2h2Z" class="clr-i-solid clr-i-solid-path-1" /><path fill="currentColor" d="M10 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-solid clr-i-solid-path-2" /><path fill="currentColor" d="M26 10a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1" class="clr-i-solid clr-i-solid-path-3" /><path fill="none" d="M0 0h36v36H0z" /></svg>
@@ -108,7 +109,7 @@ export default function Datas() {
                             value={selectedDate}
                             onChange={handleDateChange}
                             placeholderText='Filter berdasarkan waktu'
-                            className="lg:p-3.5 p-3 md:pe-[10vw] pe-[30vw] bg-[#E7E7E7]/90 text-[#6C6C6C] font-[500] lg:mb-0 mb-4 rounded text-sm sm:me-0 me-3 md:text-[16px] lg:min-w-[20vw] md:w-fit w-full min-w-screen inline-block"
+                            className="lg:p-3.5 p-3 md:pe-[10vw] w-full bg-[#E7E7E7]/90 text-[#6C6C6C] font-[500] lg:mb-0 md:mb-4 rounded text-sm sm:me-0 me-3 md:text-[16px] lg:min-w-[20vw] md:w-fit  min-w-screen inline-block"
                         />
 
                         {/* </div> */}
@@ -118,71 +119,92 @@ export default function Datas() {
                             <option value="bulanan" selected>Filter Bulanan</option>
                         </select> */}
                     </div>
+                    <div style={{ overflowX: 'auto' }} className='max-w-[350px] sm:max-w-6xl'>
+                        <table className="w-full mt-3 min-w-md rounded-md">
+                            <thead className="bg-[#363636]/20 rounded-md">
+                                <tr className="w-full text-white bg-blue-dark rounded-md">
+                                    <th className="px-4 md:px-6 py-5 text-left text-xs font-medium uppercase tracking-wider">No</th>
+                                    <th className="px-4 md:px-6 py-5 text-left text-xs font-medium uppercase tracking-wider">File Date</th>
+                                    <th className="px-4 md:px-6 py-5 text-left text-xs font-medium uppercase tracking-wider">Total Pasar</th>
+                                    <th className="px-4  md:px-6 py-5 text-left text-xs font-medium uppercase tracking-wider">Lokasi Pasar</th>
 
-                    <table className="w-full mt-3 min-w-md rounded-md">
-                        <thead className="bg-[#363636]/20 rounded-md">
-                            <tr className="w-full text-white bg-blue-dark rounded-md">
-                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">No</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">File Date</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Total Pasar</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Lokasi Pasar</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody className=" text-xs lg:text-sm font-semibold">
+                                {dataFile ? (
+                                    Object.entries(dataFile).map((key, index) => {
 
-                                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody className=" text-xs lg:text-sm font-semibold">
-                            {dataFile ? (
-                                Object.entries(dataFile).map((key, index) => {
+                                        let date = key[0]; // is date
+                                        let location = '';
+                                        let ArrayOfFiles = [];
+                                        let ind = 0;
 
-                                    let date = key[0]; // is date
-                                    let location = '';
-                                    let ArrayOfFiles = [];
-                                    let ind = 0;
-                                    key[1].map((_value, _i) => {
+                                        let locationElements = [];
+                                        key[1].forEach((_value, _i) => {
+                                            locationElements.push(
+                                                <span key={_i}>
+                                                    {_value.location}
+                                                    {_i + 1 < key[1].length ? ", " : ""}
+                                                </span>
+                                            );
 
-                                        if(_i - key[1].length === -1){
+                                            // Tambahkan <br /> setiap 3 item
+                                            if ((_i + 1) % 4 === 0 && _i + 1 !== key[1].length) {
+                                                // locationElements.push(<br key={`br-${_i}`} />);
+                                            }
 
-                                            location += `${_value.location}`;
-                                        }else{
-
-                                            location += `${_value.location}, `;
-                                        }
-
-                                        ind++;
-                                        ArrayOfFiles.push(_value.fileName)
-                                    })
-
-                                    console.log({date, key, index, location, ArrayOfFiles})
-                                    return (
-                                        <tr className={index % 2 == 0 ? "bg-white1" : "bg-white2"}>
-                                            <td className="px-6 py-3 whitespace-nowrap">
-                                                {index + 1}
-                                            </td>
-                                            <td className="px-6 py-3 whitespace-nowrap">
-                                                {date}
-                                            </td>
-                                            <td className="px-6 py-3 ">
-                                                {/* {dataFile[_i]['extension']} */}
-                                                {ind}
-                                            </td>
-                                            <td className="px-6 py-3 ">
-                                                {/* {dataFile[_i]['extension']} */}
-                                                {location}
-                                            </td>
                                             
+                                            ind++;
+                                            ArrayOfFiles.push(_value.fileName)
 
-                                            <td className="px-6 py-3 whitespace-nowrap">
-                                                {/* {String(dataFile[_i]['ketersedian'])} */}
-                                                <button onClick={() => getDataFile(ArrayOfFiles)} className="px-4 py-2.5 blue-dark bg-yellow-wine font-semibold rounded-md hover:opacity-90 active:opacity-80">
-                                                    Pantau Data
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            ) : null}
-                        </tbody>
-                    </table>
+                                        });
+                                        // key[1].map((_value, _i) => {
+
+                                        //     if (_i - key[1].length === -1) {
+                                        //         location += `${_value.location}`;
+                                        //     } else {
+                                        //         location += `${_value.location}, `;
+                                        //     }
+
+                                        //     if (_i + 1 - 3 == 0) location += "<br />";
+
+                                        //     ind++;
+                                        //     ArrayOfFiles.push(_value.fileName)
+                                        // })
+
+                                        console.log({ date, key, index, location, ArrayOfFiles })
+                                        return (
+                                            <tr className={index % 2 == 0 ? "bg-white1" : "bg-white2"}>
+                                                <td className="px-4 md:px-6 py-3 whitespace-nowrap">
+                                                    {index + 1}
+                                                </td>
+                                                <td className="px-4 md:px-6 py-3 whitespace-nowrap">
+                                                    {date}
+                                                </td>
+                                                <td className="px-4 md:px-6  py-3 ">
+                                                    {/* {dataFile[_i]['extension']} */}
+                                                    {ind}
+                                                </td>
+                                                <td className="px-4 py-3 ">
+                                                    {/* {dataFile[_i]['extension']} */}
+                                                    {locationElements}
+                                                </td>
+
+
+                                                <td className="px-6 py-3 whitespace-nowrap">
+                                                    {/* {String(dataFile[_i]['ketersedian'])} */}
+                                                    <button onClick={() => getDataFile(ArrayOfFiles)} className="px-4 py-2.5 blue-dark bg-yellow-wine font-semibold rounded-md hover:opacity-90 active:opacity-80">
+                                                        Pantau Data
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                ) : null}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

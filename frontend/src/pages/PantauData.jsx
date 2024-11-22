@@ -1160,20 +1160,20 @@ export default function PantauData() {
     }
 
     return (
-        <div className="min-h-[100vh]">
-            <div className="flex bg-main">
+        <div className="min-h-[100vh] w-full">
+            <div className="flex  w-full bg-main">
 
                 {/* your content here */}
                 {datas ? (
-                    <div className="flex flex-col gap-3 m-16 blue-dark">
+                    <div className="flex flex-col gap-2 md:gap-3 md:m-16 m-6 blue-dark">
                         <div className="flex gap-3 items-center">
                             <div>
                                 <img src={LogoPemerintah} className="w-[64px]" alt="" />
                             </div>
                             <div>
-                                <h1 className="text-[24px] font-bold">EarlyWarning<span className="yellow-wine">System</span></h1>
+                                <h1 className="md:text-[24px] font-bold">EarlyWarning<span className="yellow-wine">System</span></h1>
 
-                                <p className="py-2 max-w-2xl font-semibold text-sm uppercase">
+                                <p className="py-2 max-w-2xl font-semibold text-xs md:text-sm uppercase">
                                     Sistem informasi Peringatan Kebutuhan Pokok Masyarakat (KEPOKMAS) <br />
                                     Kabupaten Cirebon
                                 </p>
@@ -1211,83 +1211,86 @@ export default function PantauData() {
                             PERIODE : {datas && datapantau.periode == "Minggu" ? "Mingguan" : "Bulanan"}
                         </div>
 
-                        <p className="font-bold no-print">Berikan Rekomendasi Aksi Yang Tepat Menurut Analisa anda</p>
-                        <p className="no-print text-red-600 font-semibold"> <span className="text-red-600">* </span>lengkapi semua aksi rekomendasi untuk mengeprint.</p>
+                        <p className="font-bold no-print text-sm md:text-[16px]">Berikan Rekomendasi Aksi Yang Tepat Menurut Analisa anda</p>
+                        <p className="no-print text-red-600 text-sm md:text-[16px] font-semibold"> <span className="text-red-600">* </span>lengkapi semua aksi rekomendasi untuk mengeprint.</p>
 
+                        <div style={{ overflowX: 'auto' }} className='max-w-[350px] sm:max-w-6xl'>
 
-                        <table className="w-full min-w-screen rounded-md" >
-                            <thead className="bg-blue-dark text-white rounded-md text-xs font-medium border-2 border-black" style={{ borderRadius: 5 + 'px' }}>
-                                {/* <tr className="w-full text-white bg-blue-dark rounded-md">
+                            <table className="md:w-full min-w-screen rounded-md " >
+                                <thead className="bg-blue-dark text-white rounded-md text-xs font-medium border-2 border-black" style={{ borderRadius: 5 + 'px' }}>
+                                    {/* <tr className="w-full text-white bg-blue-dark rounded-md">
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">No</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">File Date</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Extension file</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Ketersedian</th>
                             </tr> */}
-                                <td className="border border-gray-400 px-3 py-2">No.</td>
-                                <td className="border border-gray-400 px-3 py-2">Jenis Bahan Pokok</td>
+                                    <td className="border border-gray-400 px-3 py-2">No.</td>
+                                    <td className="border border-gray-400 px-3 py-2">Jenis Bahan Pokok</td>
 
-                                {Array.from({ length: datapantau.detailWeekDayStartEnd.length }).map((_val, _i) => (
-                                    <>
-                                        <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) AVG (Rp.)</td>
-                                        <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) - Kvh</td>
-                                        {/* <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} Bulan {datapantau.month}- Kvh</td> */}
-                                    </>
-                                ))}
-                                {/* <th className="border border-gray-400 px-3 py-2">Minggu 2 - AVG (Rp.)</th>
+                                    {Array.from({ length: datapantau.detailWeekDayStartEnd.length }).map((_val, _i) => (
+                                        <>
+                                            <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) AVG (Rp.)</td>
+                                            <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} ( {datapantau.detailWeekDayStartEnd[_i]['start']} - {datapantau.detailWeekDayStartEnd[_i]['end']} {datapantau.month} ) - Kvh</td>
+                                            {/* <td className="border border-gray-400 px-3 py-2">{datapantau.periode} {_i + 1} Bulan {datapantau.month}- Kvh</td> */}
+                                        </>
+                                    ))}
+                                    {/* <th className="border border-gray-400 px-3 py-2">Minggu 2 - AVG (Rp.)</th>
                             <th className="border border-gray-400 px-3 py-2">Minggu 2 - Kvh</th> */}
-                                <td className="border border-gray-400 px-3 py-2 space-nowrap">Rekomendasi Aksi</td>
-                            </thead>
-                            <tbody className="text-xs lg:text-xs font-medium border-2 border-black">
-                                {datas.length > 0 ? (
-                                    datas.map((val, _i) => {
-                                        // !_i < datas.countLength ? return null :  return true;
-                                        return (
-                                            <tr className={_i % 2 == 0 ? "bg-white1" : "bg-white2"}>
-                                                <th className="px-6 border-[#073B4C] border py-3 whitespace-nowrap">
-                                                    {_i + 1}
-                                                </th>
-                                                <th className="border-[#073B4C] border px-6 py-3 ">
-                                                    {datas[_i]['name']}
-                                                </th>
-                                                {Array.from({ length: datas[_i]['kvh'].length }).map((_val, __i) => (
-                                                    // <HandleColorTd price={datas[_i]['weekly'][__i]['prices']} kvh={datas[_i]['weekly'][__i]['kvh']} />
-                                                    <HandleColorTd price={datas[_i]['prices'][__i]} kvh={datas[_i]['kvh'][__i]} />
+                                    <td className="border border-gray-400 px-3 py-2 space-nowrap">Rekomendasi Aksi</td>
+                                </thead>
+                                <tbody className="text-xs lg:text-xs font-medium border-2 border-black">
+                                    {datas.length > 0 ? (
+                                        datas.map((val, _i) => {
+                                            // !_i < datas.countLength ? return null :  return true;
+                                            return (
+                                                <tr className={_i % 2 == 0 ? "bg-white1" : "bg-white2"}>
+                                                    <th className="px-6 border-[#073B4C] border py-3 whitespace-nowrap">
+                                                        {_i + 1}
+                                                    </th>
+                                                    <th className="border-[#073B4C] border px-6 py-3 ">
+                                                        {datas[_i]['name']}
+                                                    </th>
+                                                    {Array.from({ length: datas[_i]['kvh'].length }).map((_val, __i) => (
+                                                        // <HandleColorTd price={datas[_i]['weekly'][__i]['prices']} kvh={datas[_i]['weekly'][__i]['kvh']} />
+                                                        <HandleColorTd price={datas[_i]['prices'][__i]} kvh={datas[_i]['kvh'][__i]} />
 
-                                                ))}
+                                                    ))}
 
-                                                <td className="px-6 py-3 whitespace-nowrap border-[#073B4C] border text-sm">
-                                                    {isPrint ? (
-                                                        recomendations[val.name]
-                                                    ) : (
-                                                        <input type="text" className="border-[#073B4C] border bg-white text-gray rounded-sm text-xs py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, val.name)} />
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                ) : null}
-
-                                <tr className={datas.length % 2 == 0 ? "bg-white1" : "bg-white2"}>
-                                    <td colSpan={2} className="px-6 uppercase font-bold border-[#073B4C] border py-2 whitespace-nowrap">
-                                        KVH RATA RATA {datas.type == "Minggu" ? "Mingguan" : "Bulanan"}
-                                    </td>
-
-                                    {rataKVH.length > 0 ? (
-                                        rataKVH.map((kvh) => (
-                                            <HandleColorAverage kvh={kvh} />
-                                        ))
+                                                    <td className="px-6 py-3 whitespace-nowrap border-[#073B4C] border text-sm">
+                                                        {isPrint ? (
+                                                            recomendations[val.name]
+                                                        ) : (
+                                                            <input type="text" className="border-[#073B4C] border bg-white text-gray rounded-sm text-xs py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, val.name)} />
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
                                     ) : null}
 
-                                    <td className="px-6 py-2 whitespace-nowrap border-[#073B4C] border">
-                                        {isPrint ? (
-                                            recomendations["rata_rata"]
-                                        ) : (
-                                            <input type="text" className="text-xs border-[#073B4C] border bg-white text-gray rounded-sm py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, "rata_rata")} />
-                                        )}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tr className={datas.length % 2 == 0 ? "bg-white1" : "bg-white2"}>
+                                        <td colSpan={2} className="px-6 uppercase font-bold border-[#073B4C] border py-2 whitespace-nowrap">
+                                            KVH RATA RATA {datas.type == "Minggu" ? "Mingguan" : "Bulanan"}
+                                        </td>
+
+                                        {rataKVH.length > 0 ? (
+                                            rataKVH.map((kvh) => (
+                                                <HandleColorAverage kvh={kvh} />
+                                            ))
+                                        ) : null}
+
+                                        <td className="px-6 py-2 whitespace-nowrap border-[#073B4C] border">
+                                            {isPrint ? (
+                                                recomendations["rata_rata"]
+                                            ) : (
+                                                <input type="text" className="text-xs border-[#073B4C] border bg-white text-gray rounded-sm py-2 px-3 min-w-[200px]" onChange={() => handleInputChange(event, "rata_rata")} />
+                                            )}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
 
                         <div className="font-semibold flex-col flex gap-2">
 
@@ -1313,7 +1316,7 @@ export default function PantauData() {
                         <Link to={"/datas"} className="text-blue-600 font-semibold underline">Kembali Ke Home</Link>
 
                         {datas && Object.keys(recomendations).length == datas.length + 1 ? (
-                            <button onClick={printLayar} type="submit" className="no-print flex mt-3 font-semibold w-fit gap-2 rounded-md hover:opacity-90 active:opacity-80 blue-dark bg-yellow-wine px-3 py-3">
+                            <button onClick={printLayar} type="submit" className="no-print flex mt-3 font-semibold w-fit gap-2 rounded-md hover:opacity-90 active:opacity-80 blue-dark bg-yellow-wine px-3 py-1.5 md:py-3 md:text-[16px] text-sm ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 16h4c.55 0 1-.45 1-1v-5h1.59c.89 0 1.34-1.08.71-1.71L12.71 3.7a.996.996 0 0 0-1.41 0L6.71 8.29c-.63.63-.19 1.71.7 1.71H9v5c0 .55.45 1 1 1m-4 2h12c.55 0 1 .45 1 1s-.45 1-1 1H6c-.55 0-1-.45-1-1s.45-1 1-1" /></svg>
                                 Submit dan Pantau Data
                             </button>
@@ -1355,7 +1358,7 @@ function HandleColorTd({ price, kvh }) {
                     RP. {Math.floor(price)}
                 </td>
                 <td className="border-[#073B4C] bg-[#20E45B] border px-4 py-4 whitespace-nowrap">
-                    { kvh ? kvh.toFixed(2) : 0}%
+                    {kvh ? kvh.toFixed(2) : 0}%
                 </td>
             </>
         )
