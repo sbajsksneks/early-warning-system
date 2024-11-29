@@ -154,7 +154,7 @@ export default function UploadBerkas() {
                             <option value="bulanan" selected>Filter Bulanan</option>
                         </select> */}
                     </div>
-                    <div className="text-sm text-gray-600">Hari senin di minggu pertama Jatuh Pada tanggal?</div>
+                    <div className="text-sm font-semibold text-gray-600">Hari senin di minggu pertama Jatuh Pada tanggal?</div>
 
                     <div className="flex gap-3 items-center">
                         <span className="blue-dark">

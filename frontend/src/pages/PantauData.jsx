@@ -1214,7 +1214,7 @@ export default function PantauData() {
                         <p className="font-bold no-print text-sm md:text-[16px]">Berikan Rekomendasi Aksi Yang Tepat Menurut Analisa anda</p>
                         <p className="no-print text-red-600 text-sm md:text-[16px] font-semibold"> <span className="text-red-600">* </span>lengkapi semua aksi rekomendasi untuk mengeprint.</p>
 
-                        <div style={{ overflowX: 'auto' }} className='max-w-[350px] sm:max-w-6xl'>
+                        <div style={{ overflowX: 'auto' }} className='max-w-[350px] sm:max-w-[1200px]'>
 
                             <table className="md:w-full min-w-screen rounded-md " >
                                 <thead className="bg-blue-dark text-white rounded-md text-xs font-medium border-2 border-black" style={{ borderRadius: 5 + 'px' }}>
