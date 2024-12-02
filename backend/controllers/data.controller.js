@@ -128,16 +128,17 @@ export const fileupload = async (req, res) => {
       const harga_harian = {};
       const harga_mingguan = {};
 
-      // Hanya ambil data mulai dari tanggal yang dipilih
-      for (let i = startDay; i <= daysInMonth; i++) {
+      // Simpan data harian lengkap dari tanggal 1
+      for (let i = 1; i <= daysInMonth; i++) {
         harga_harian[i.toString()] = row[i.toString()] || "0";
       }
 
-      // Hitung data mingguan
+      // Generate periode mingguan berdasarkan tanggal awal
       const weeklyPeriods = generateWeeklyPeriods(startDay, daysInMonth, metadata.bulan);
       weeklyPeriods.forEach(period => {
         let weekPrices = [];
         
+        // Ambil harga untuk periode minggu ini
         for (let day = period.start; day <= period.end; day++) {
           const price = parseFloat(harga_harian[day.toString()]?.replace(/\./g, '') || "0");
           if (price > 0) {
@@ -146,37 +147,39 @@ export const fileupload = async (req, res) => {
         }
 
         const avgPrice = calculateRataRata(weekPrices);
-        const kvh = calculateWeeklyKvh(weekPrices); // Panggil fungsi KVH
+        const kvh = calculateWeeklyKvh(weekPrices);
 
         harga_mingguan[`minggu_${period.minggu}`] = {
           periode: period.periode,
           rata_rata: avgPrice,
-          kvh: kvh // Tambahkan KVH ke output
+          kvh: kvh
         };
       });
 
+      // Hitung statistik menggunakan data lengkap
       return {
         Komoditas: row.Komoditas,
-        harga_harian,
-        harga_mingguan,
-        Terendah: calculateTerendah(harga_harian),
-        Tertinggi: calculateTertinggi(harga_harian),
-        "Rata-rata": calculateRataRata(harga_harian)
+        harga_harian,         // Data harian lengkap dari tanggal 1
+        harga_mingguan,       // Data mingguan sesuai input user
+        Terendah: calculateTerendah(Object.values(harga_harian)),
+        Tertinggi: calculateTertinggi(Object.values(harga_harian)),
+        "Rata-rata": calculateRataRata(Object.values(harga_harian))
       };
     });
 
-    // Update metadata dengan format yang diminta
-    const monthNumber = getMonthNumber(metadata.bulan);
+    // Update metadata dengan informasi periode
     metadata = {
-      timestamp: `${metadata.tahun}-${String(monthNumber + 1).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`,
-      start: `${String(startDay).padStart(2, '0')} ${metadata.bulan} ${metadata.tahun}`,
-      end: `${String(daysInMonth).padStart(2, '0')} ${metadata.bulan} ${metadata.tahun}`,
+      timestamp: `${metadata.tahun}-${String(getMonthNumber(metadata.bulan) + 1).padStart(2, '0')}-${String(startDay).padStart(2, '0')}`,
+      start: `${startDay} ${metadata.bulan} ${metadata.tahun}`,
+      end: `${daysInMonth} ${metadata.bulan} ${metadata.tahun}`,
       bulan: metadata.bulan,
       tahun: metadata.tahun,
       lokasi_pasar: metadata.lokasi_pasar,
+      tanggal_awal: startDay,  // Simpan tanggal awal di metadata
       periode_mingguan: generateWeeklyPeriods(startDay, daysInMonth, metadata.bulan)
     };
 
+    // Simpan ke JSON
     const jsonContent = {
       metadata,
       data: formattedData
@@ -438,7 +441,6 @@ function normalizeString(str) {
 
 function transformDataForPantau(jsonContent) {
   if (!jsonContent || !jsonContent.metadata || !jsonContent.data) {
-    console.error('Invalid jsonData structure:', jsonContent);
     return {
       type: "Minggu",
       location: "Unknown",
@@ -452,10 +454,9 @@ function transformDataForPantau(jsonContent) {
 
   const { metadata, data } = jsonContent;
   const weekCount = 4;
-  const daysPerWeek = 7;
-
-  // Definisikan startDay di awal
-  const startDay = parseInt(metadata.timestamp?.split('-')[2] || 1);
+  
+  // Gunakan tanggal awal dari metadata
+  const startDay = metadata.tanggal_awal || 1;
   const daysInMonth = new Date(metadata.tahun, getMonthNumber(metadata.bulan) + 1, 0).getDate();
 
   const transformedData = {
@@ -486,24 +487,14 @@ function transformDataForPantau(jsonContent) {
       };
     }
 
-    // Generate data mingguan
-    const details = [];
-    for (let i = 1; i <= 4; i++) {
-      const weekData = item.harga_mingguan?.[`minggu_${i}`] || {};
-      const weekPrices = Object.entries(item.harga_harian)
-        .filter(([day]) => {
-          const dayNum = parseInt(day);
-          return dayNum >= ((i-1) * 7 + 1) && dayNum <= Math.min(i * 7, 31);
-        })
-        .map(([_, price]) => parseFloat(price.replace(/\./g, '')))
-        .filter(price => price > 0);
-
-      details.push({
-        title: `Minggu ${i}`,
+    // Gunakan data mingguan yang sudah dihitung
+    const details = Object.entries(item.harga_mingguan)
+      .sort(([a], [b]) => parseInt(a.split('_')[1]) - parseInt(b.split('_')[1]))
+      .map(([_, weekData], index) => ({
+        title: `Minggu ${index + 1}`,
         Avg_rupiah: parseFloat(weekData.rata_rata || 0),
-        Kvh: parseFloat(calculateWeeklyKvh(weekPrices)) // Panggil fungsi KVH
-      });
-    }
+        Kvh: parseFloat(weekData.kvh || 0)
+      }));
 
     return {
       Nama_pangan: komoditas,

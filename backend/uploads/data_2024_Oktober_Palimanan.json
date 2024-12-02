@@ -1,42 +1,35 @@
 {
   "metadata": {
-    "timestamp": "2024-10-03",
-    "start": "3 Oktober 2024",
+    "timestamp": "2024-10-05",
+    "start": "05 Oktober 2024",
     "end": "31 Oktober 2024",
     "bulan": "Oktober",
     "tahun": 2024,
     "lokasi_pasar": "Pasar Palimanan",
-    "tanggal_awal": 3,
     "periode_mingguan": [
       {
         "minggu": 1,
-        "start": 3,
-        "end": 9,
-        "periode": "3-9 Oktober"
+        "start": 5,
+        "end": 11,
+        "periode": "5-11 Oktober"
       },
       {
         "minggu": 2,
-        "start": 10,
-        "end": 16,
-        "periode": "10-16 Oktober"
+        "start": 12,
+        "end": 18,
+        "periode": "12-18 Oktober"
       },
       {
         "minggu": 3,
-        "start": 17,
-        "end": 23,
-        "periode": "17-23 Oktober"
+        "start": 19,
+        "end": 25,
+        "periode": "19-25 Oktober"
       },
       {
         "minggu": 4,
-        "start": 24,
-        "end": 30,
-        "periode": "24-30 Oktober"
-      },
-      {
-        "minggu": 5,
-        "start": 31,
+        "start": 26,
         "end": 31,
-        "periode": "31-31 Oktober"
+        "periode": "26-31 Oktober"
       }
     ]
   },
@@ -44,10 +37,6 @@
     {
       "Komoditas": "Gula Pasir lokal",
       "harga_harian": {
-        "1": "19.000",
-        "2": "19.000",
-        "3": "19.000",
-        "4": "19.000",
         "5": "19.000",
         "6": "19.000",
         "7": "19.000",
@@ -78,29 +67,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "19000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "19000",
@@ -110,10 +94,6 @@
     {
       "Komoditas": "Minyak Goreng Curah",
       "harga_harian": {
-        "1": "16.000",
-        "2": "16.000",
-        "3": "16.000",
-        "4": "16.000",
         "5": "16.000",
         "6": "16.000",
         "7": "16.000",
@@ -144,29 +124,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "16000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "16000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "16000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "16000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "16000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "16000",
@@ -176,10 +151,6 @@
     {
       "Komoditas": "Daging Sapi Murni",
       "harga_harian": {
-        "1": "130.000",
-        "2": "130.000",
-        "3": "130.000",
-        "4": "130.000",
         "5": "130.000",
         "6": "130.000",
         "7": "130.000",
@@ -210,29 +181,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "130000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "130000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "130000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "130000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "130000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "130000",
@@ -242,10 +208,6 @@
     {
       "Komoditas": "Daging Ayam Broiler",
       "harga_harian": {
-        "1": "32.000",
-        "2": "32.000",
-        "3": "32.000",
-        "4": "32.000",
         "5": "32.000",
         "6": "32.000",
         "7": "32.000",
@@ -276,42 +238,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "32000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
-          "rata_rata": "33428.57",
-          "kvh": "2.92"
+          "periode": "12-18 Oktober",
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "34000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "34000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "34000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "32000",
       "Tertinggi": "34000",
-      "Rata-rata": "33290.32"
+      "Rata-rata": "33481.48"
     },
     {
       "Komoditas": "Daging Ayam Kampung",
       "harga_harian": {
-        "1": "70.000",
-        "2": "70.000",
-        "3": "70.000",
-        "4": "70.000",
         "5": "70.000",
         "6": "70.000",
         "7": "70.000",
@@ -342,29 +295,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "70000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "70000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "70000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "70000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "70000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "70000",
@@ -374,10 +322,6 @@
     {
       "Komoditas": "Telur Ayam Broiler",
       "harga_harian": {
-        "1": "27.000",
-        "2": "27.000",
-        "3": "27.000",
-        "4": "27.000",
         "5": "27.000",
         "6": "27.000",
         "7": "27.000",
@@ -408,29 +352,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "27000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "27000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "27000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "27000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "27000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "27000",
@@ -440,10 +379,6 @@
     {
       "Komoditas": "Garam Beryodium",
       "harga_harian": {
-        "1": "2.500",
-        "2": "2.500",
-        "3": "2.500",
-        "4": "2.500",
         "5": "2.500",
         "6": "2.500",
         "7": "2.500",
@@ -474,29 +409,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "2500.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "2500.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "2500.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "2500.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "2500.00",
-          "kvh": "0"
         }
       },
       "Terendah": "2500",
@@ -506,10 +436,6 @@
     {
       "Komoditas": "Cabe Merah Keriting",
       "harga_harian": {
-        "1": "40.000",
-        "2": "40.000",
-        "3": "40.000",
-        "4": "40.000",
         "5": "30.000",
         "6": "30.000",
         "7": "30.000",
@@ -540,42 +466,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
-          "rata_rata": "32857.14",
-          "kvh": "14.85"
+          "periode": "5-11 Oktober",
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "31428.57",
           "kvh": "12.03"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "30000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "30000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "30000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "30000",
       "Tertinggi": "40000",
-      "Rata-rata": "31612.90"
+      "Rata-rata": "30370.37"
     },
     {
       "Komoditas": "Cabe Merah Biasa",
       "harga_harian": {
-        "1": "25.000",
-        "2": "25.000",
-        "3": "25.000",
-        "4": "24.000",
         "5": "20.000",
         "6": "20.000",
         "7": "20.000",
@@ -606,42 +523,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
-          "rata_rata": "21285.71",
-          "kvh": "10.40"
+          "periode": "5-11 Oktober",
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "20000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "20000",
-      "Tertinggi": "25000",
-      "Rata-rata": "20612.90"
+      "Tertinggi": "20000",
+      "Rata-rata": "20000.00"
     },
     {
       "Komoditas": "Cabe Rawit Merah",
       "harga_harian": {
-        "1": "40.000",
-        "2": "40.000",
-        "3": "40.000",
-        "4": "40.000",
         "5": "40.000",
         "6": "40.000",
         "7": "40.000",
@@ -672,29 +580,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "40000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "40000",
@@ -704,10 +607,6 @@
     {
       "Komoditas": "Cabe Rawit Hijau",
       "harga_harian": {
-        "1": "32.000",
-        "2": "32.000",
-        "3": "32.000",
-        "4": "32.000",
         "5": "32.000",
         "6": "32.000",
         "7": "32.000",
@@ -738,42 +637,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "31714.29",
           "kvh": "2.38"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "32000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "32000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "32000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "32000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "30000",
       "Tertinggi": "32000",
-      "Rata-rata": "31935.48"
+      "Rata-rata": "31925.93"
     },
     {
       "Komoditas": "Kentang",
       "harga_harian": {
-        "1": "22.000",
-        "2": "22.000",
-        "3": "22.000",
-        "4": "15.000",
         "5": "20.000",
         "6": "20.000",
         "7": "20.000",
@@ -804,42 +694,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
-          "rata_rata": "19571.43",
-          "kvh": "10.98"
+          "periode": "5-11 Oktober",
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "20000.00",
-          "kvh": "0"
         }
       },
-      "Terendah": "15000",
-      "Tertinggi": "22000",
-      "Rata-rata": "20032.26"
+      "Terendah": "20000",
+      "Tertinggi": "20000",
+      "Rata-rata": "20000.00"
     },
     {
       "Komoditas": "Cabe Hijau",
       "harga_harian": {
-        "1": "20.000",
-        "2": "20.000",
-        "3": "20.000",
-        "4": "20.000",
         "5": "20.000",
         "6": "20.000",
         "7": "20.000",
@@ -870,29 +751,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "20000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "20000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "20000",
@@ -902,10 +778,6 @@
     {
       "Komoditas": "Bawang Merah",
       "harga_harian": {
-        "1": "24.000",
-        "2": "24.000",
-        "3": "24.000",
-        "4": "24.000",
         "5": "24.000",
         "6": "24.000",
         "7": "24.000",
@@ -936,29 +808,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "24000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "24000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "24000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "24000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "24000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "24000",
@@ -968,10 +835,6 @@
     {
       "Komoditas": "Bawang Putih",
       "harga_harian": {
-        "1": "40.000",
-        "2": "40.000",
-        "3": "40.000",
-        "4": "40.000",
         "5": "40.000",
         "6": "40.000",
         "7": "40.000",
@@ -1002,29 +865,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "40000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "40000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "40000",
@@ -1034,10 +892,6 @@
     {
       "Komoditas": "Bawang Bombay",
       "harga_harian": {
-        "1": "33.000",
-        "2": "30.000",
-        "3": "30.000",
-        "4": "30.000",
         "5": "30.000",
         "6": "30.000",
         "7": "30.000",
@@ -1068,42 +922,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "30000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "30428.57",
           "kvh": "3.73"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "30000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "30000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "30000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "30000",
       "Tertinggi": "33000",
-      "Rata-rata": "30193.55"
+      "Rata-rata": "30111.11"
     },
     {
       "Komoditas": "Bawang putih Katingan",
       "harga_harian": {
-        "1": "45.000",
-        "2": "45.000",
-        "3": "45.000",
-        "4": "45.000",
         "5": "45.000",
         "6": "45.000",
         "7": "45.000",
@@ -1134,29 +979,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "45000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "45000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "45000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "45000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "45000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "45000",
@@ -1166,10 +1006,6 @@
     {
       "Komoditas": "Daging Sapi Kw 2",
       "harga_harian": {
-        "1": "100.000",
-        "2": "100.000",
-        "3": "100.000",
-        "4": "100.000",
         "5": "100.000",
         "6": "100.000",
         "7": "100.000",
@@ -1200,29 +1036,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "100000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "100000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "100000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "100000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "100000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "100000",
@@ -1232,10 +1063,6 @@
     {
       "Komoditas": "Beras Medium",
       "harga_harian": {
-        "1": "13.000",
-        "2": "13.000",
-        "3": "13.000",
-        "4": "13.000",
         "5": "13.000",
         "6": "13.000",
         "7": "13.000",
@@ -1266,42 +1093,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "13000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "13142.86",
           "kvh": "2.88"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "13000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "13000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "13000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "13000",
       "Tertinggi": "14000",
-      "Rata-rata": "13032.26"
+      "Rata-rata": "13037.04"
     },
     {
       "Komoditas": "Beras Premium I",
       "harga_harian": {
-        "1": "15.000",
-        "2": "15.000",
-        "3": "15.000",
-        "4": "15.000",
         "5": "15.000",
         "6": "15.000",
         "7": "15.000",
@@ -1332,42 +1150,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "15000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "15000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "15071.43",
           "kvh": "1.25"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "15000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "15000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "15000",
       "Tertinggi": "15500",
-      "Rata-rata": "15016.13"
+      "Rata-rata": "15018.52"
     },
     {
       "Komoditas": "Beras Premium II",
       "harga_harian": {
-        "1": "14.000",
-        "2": "14.000",
-        "3": "14.000",
-        "4": "14.000",
         "5": "14.000",
         "6": "14.000",
         "7": "14.000",
@@ -1398,42 +1207,33 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "14071.43",
           "kvh": "1.34"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "14000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "14000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "14000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "14000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "14000",
       "Tertinggi": "14500",
-      "Rata-rata": "14016.13"
+      "Rata-rata": "14018.52"
     },
     {
       "Komoditas": "Minyak Goreng Kemasan Sederhana",
       "harga_harian": {
-        "1": "19.000",
-        "2": "19.000",
-        "3": "19.000",
-        "4": "19.000",
         "5": "19.000",
         "6": "19.000",
         "7": "19.000",
@@ -1464,29 +1264,24 @@
       },
       "harga_mingguan": {
         "minggu_1": {
-          "periode": "3-9 Oktober",
+          "periode": "5-11 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_2": {
-          "periode": "10-16 Oktober",
+          "periode": "12-18 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_3": {
-          "periode": "17-23 Oktober",
+          "periode": "19-25 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
         },
         "minggu_4": {
-          "periode": "24-30 Oktober",
+          "periode": "26-31 Oktober",
           "rata_rata": "19000.00",
           "kvh": "0.00"
-        },
-        "minggu_5": {
-          "periode": "31-31 Oktober",
-          "rata_rata": "19000.00",
-          "kvh": "0"
         }
       },
       "Terendah": "19000",
