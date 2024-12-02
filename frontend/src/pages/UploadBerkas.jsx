@@ -56,7 +56,14 @@ export default function UploadBerkas() {
             }
 
             alert('File berhasil diupload!');
-            navigate('/datas');
+            // Swal.fire({
+            //     title: "Succesfully complete!",
+            //     text: "File berhasil diupload!",
+            //     icon: "success"
+            //   }).then(() => {
+                //   });
+                window.location.reload();
+            // navigate('/datas');
             // navigate('/data/pantau');
 
         } catch (err) {

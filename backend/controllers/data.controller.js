@@ -2,6 +2,7 @@ import xlsx from 'xlsx';
 import fs from 'fs/promises';
 import path from 'path';
 import { readFile } from 'fs';
+import { fileURLToPath } from 'url';
 
 // Buat folder untuk menyimpan file JSON jika belum ada
 const JSON_DIR = path.join(process.cwd(), 'uploads', 'json');
@@ -1064,4 +1065,41 @@ function calculateWeeklyKvh(prices) {
   const stdDev = Math.sqrt(variance);
 
   return ((stdDev / avg) * 100).toFixed(2);
+} 
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsDir = path.join(__dirname, '..', 'uploads', 'json');
+
+async function deleteFileByName(fileName) {
+  const filePath = path.join(uploadsDir, fileName);
+    try {
+        // Periksa apakah file ada
+        await fs.access(filePath);
+        // Hapus file
+        await fs.unlink(filePath);
+        console.log(`File ${fileName} deleted successfully.`);
+        return { success: true, message: `File ${fileName} deleted.` };
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            console.error('File not found:', fileName);
+            return { success: false, message: 'File not found' };
+        } else {
+            console.error('Error deleting file:', err.message);
+            return { success: false, message: 'Error deleting file' };
+        }
+    }
+}
+
+export const DeleteFileJson = (req, res) => {
+  try {
+    const fileName = req.params.fileName;
+    deleteFileByName(fileName).then(() => {
+      res.json({message : "Oke file deleted"})
+    });
+
+  } catch (error) {
+    console.log({error})
+  }
 } 

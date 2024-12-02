@@ -68,19 +68,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "7500.00"
+          "rata_rata": "7500.00",
+          "kvh": "13.33"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "6000",
@@ -121,19 +125,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "18000",
@@ -174,19 +182,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "17000.00"
+          "rata_rata": "17000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "17000",
@@ -227,19 +239,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "140000.00"
+          "rata_rata": "140000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "140000",
@@ -280,19 +296,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "3.13"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "31285.71"
+          "rata_rata": "31285.71",
+          "kvh": "1.56"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "31714.29"
+          "rata_rata": "31714.29",
+          "kvh": "1.54"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "30666.67"
+          "rata_rata": "30666.67",
+          "kvh": "1.68"
         }
       },
       "Terendah": "30000",
@@ -333,19 +353,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "27000.00"
+          "rata_rata": "27000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "26714.29"
+          "rata_rata": "26714.29",
+          "kvh": "1.83"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "26000.00"
+          "rata_rata": "26000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "25666.67"
+          "rata_rata": "25666.67",
+          "kvh": "1.01"
         }
       },
       "Terendah": "25500",
@@ -386,19 +410,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "12000",
@@ -439,19 +467,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "3000",
@@ -492,19 +524,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "34000.00"
+          "rata_rata": "34000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "33200.00"
+          "rata_rata": "33200.00",
+          "kvh": "3.30"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "33600.00"
+          "rata_rata": "33600.00",
+          "kvh": "2.66"
         }
       },
       "Terendah": "32000",
@@ -545,19 +581,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "12000",
@@ -598,19 +638,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "50000.00"
+          "rata_rata": "50000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "50000.00"
+          "rata_rata": "50000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "46428.57"
+          "rata_rata": "46428.57",
+          "kvh": "8.14"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "40000.00"
+          "rata_rata": "40000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "40000",
@@ -651,19 +695,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "35857.14"
+          "rata_rata": "35857.14",
+          "kvh": "1.05"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "30571.43"
+          "rata_rata": "30571.43",
+          "kvh": "3.19"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "10.54"
         }
       },
       "Terendah": "22000",
@@ -704,19 +752,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "87285.71"
+          "rata_rata": "87285.71",
+          "kvh": "1.44"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "74142.86"
+          "rata_rata": "74142.86",
+          "kvh": "6.05"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "62857.14"
+          "rata_rata": "62857.14",
+          "kvh": "7.76"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "50833.33"
+          "rata_rata": "50833.33",
+          "kvh": "14.32"
         }
       },
       "Terendah": "44000",
@@ -757,19 +809,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "44000.00"
+          "rata_rata": "44000.00",
+          "kvh": "9.37"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "39142.86"
+          "rata_rata": "39142.86",
+          "kvh": "2.73"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "42571.43"
+          "rata_rata": "42571.43",
+          "kvh": "5.73"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "34833.33"
+          "rata_rata": "34833.33",
+          "kvh": "2.82"
         }
       },
       "Terendah": "34000",
@@ -810,19 +866,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "3000.00"
+          "rata_rata": "3000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "3000",
@@ -863,19 +923,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "18000.00"
+          "rata_rata": "18000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "18000",
@@ -916,19 +980,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "19000.00"
+          "rata_rata": "19000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "19000",
@@ -969,19 +1037,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "19500.00"
+          "rata_rata": "19500.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "19500",
@@ -1022,19 +1094,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "170000.00"
+          "rata_rata": "170000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "170000",
@@ -1075,19 +1151,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "11000.00"
+          "rata_rata": "11000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "11000",
@@ -1128,19 +1208,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "7571.43"
+          "rata_rata": "7571.43",
+          "kvh": "19.97"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "7000.00"
+          "rata_rata": "7000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "7000",
@@ -1181,19 +1265,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "12000.00"
+          "rata_rata": "12000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "12000",
@@ -1234,19 +1322,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "22000",
@@ -1287,19 +1379,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "32000",
@@ -1340,19 +1436,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "20857.14"
+          "rata_rata": "20857.14",
+          "kvh": "5.13"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "22000.00"
+          "rata_rata": "22000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "20400.00"
+          "rata_rata": "20400.00",
+          "kvh": "4.38"
         }
       },
       "Terendah": "20000",
@@ -1393,19 +1493,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "16000.00"
+          "rata_rata": "16000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "16000",
@@ -1446,19 +1550,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "20000",
@@ -1499,19 +1607,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "8000.00"
+          "rata_rata": "8000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "8000",
@@ -1552,19 +1664,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "9000.00"
+          "rata_rata": "9000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "9000",
@@ -1605,19 +1721,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "14000",
@@ -1658,19 +1778,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "24000.00"
+          "rata_rata": "24000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "24000",
@@ -1711,19 +1835,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "22857.14"
+          "rata_rata": "22857.14",
+          "kvh": "6.88"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "20000.00"
+          "rata_rata": "20000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "23714.29"
+          "rata_rata": "23714.29",
+          "kvh": "3.19"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "20666.67"
+          "rata_rata": "20666.67",
+          "kvh": "5.00"
         }
       },
       "Terendah": "20000",
@@ -1764,19 +1892,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "22857.14"
+          "rata_rata": "22857.14",
+          "kvh": "6.88"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "21714.29"
+          "rata_rata": "21714.29",
+          "kvh": "8.29"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "20571.43"
+          "rata_rata": "20571.43",
+          "kvh": "4.74"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "23000.00"
+          "rata_rata": "23000.00",
+          "kvh": "4.76"
         }
       },
       "Terendah": "20000",
@@ -1817,19 +1949,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "38285.71"
+          "rata_rata": "38285.71",
+          "kvh": "1.97"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "38285.71"
+          "rata_rata": "38285.71",
+          "kvh": "1.97"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "38285.71"
+          "rata_rata": "38285.71",
+          "kvh": "1.97"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "37000.00"
+          "rata_rata": "37000.00",
+          "kvh": "2.96"
         }
       },
       "Terendah": "36000",
@@ -1870,19 +2006,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "60000.00"
+          "rata_rata": "60000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "60000",
@@ -1923,19 +2063,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "44285.71"
+          "rata_rata": "44285.71",
+          "kvh": "1.71"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "43142.86"
+          "rata_rata": "43142.86",
+          "kvh": "2.48"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "44142.86"
+          "rata_rata": "44142.86",
+          "kvh": "0.86"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "42666.67"
+          "rata_rata": "42666.67",
+          "kvh": "2.42"
         }
       },
       "Terendah": "42000",
@@ -1976,19 +2120,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "120000.00"
+          "rata_rata": "120000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "120000",
@@ -2029,19 +2177,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "30000.00"
+          "rata_rata": "30000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "30000",
@@ -2082,19 +2234,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "32000.00"
+          "rata_rata": "32000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "32000",
@@ -2135,19 +2291,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "14000.00"
+          "rata_rata": "14000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "14000",
@@ -2188,19 +2348,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "13000.00"
+          "rata_rata": "13000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "13000",
@@ -2241,19 +2405,23 @@
       "harga_mingguan": {
         "minggu_1": {
           "periode": "5-11 Agustus",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_2": {
           "periode": "12-18 Agustus",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_3": {
           "periode": "19-25 Agustus",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         },
         "minggu_4": {
           "periode": "26-31 Agustus",
-          "rata_rata": "15000.00"
+          "rata_rata": "15000.00",
+          "kvh": "0.00"
         }
       },
       "Terendah": "15000",

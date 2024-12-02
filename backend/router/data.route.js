@@ -1,5 +1,5 @@
 import express from 'express';
-import { fileupload, getData, getJsonContent, getWeeklyData, calculateAverageAcrossMarkets } from '../controllers/data.controller.js';
+import { fileupload, getData, getJsonContent, getWeeklyData, calculateAverageAcrossMarkets, DeleteFileJson } from '../controllers/data.controller.js';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -13,6 +13,7 @@ router.get('/getdatas', getData);
 router.post('/contents', getJsonContent);
 // router.get('/content/:fileName', getJsonContent);
 router.get('/weekly/:fileName', getWeeklyData);
+router.delete('/content/:fileName', DeleteFileJson);
 
 // Endpoint untuk testing multiple markets
 router.get('/test/markets', async (req, res) => {
