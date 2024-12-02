@@ -1,6 +1,6 @@
-# EARLY WARNING SYSTEM PANGAN CIREBON
+# EARLY WARNING SYSTEM KEPOKMAS KABUPATEN CIREBON
 
-Welcome to **EARLY WARNING SYSTEM**, Sebuah System informasi berbasis web tentang Peringatan Dini Kebutuhan Pokok Pangan Masyarakat di daerah Cirebon, Sumber.
+Welcome to **EARLY WARNING SYSTEM**, Sebuah sistem peringatan dini berbasis web tentang Peringatan Dini Kebutuhan Pokok Pangan Masyarakat di daerah Cirebon, Sumber.
 
 ## Table of Contents
 
