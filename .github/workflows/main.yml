@@ -37,7 +37,7 @@ jobs:
       run: |
         npm install -g ngrok
         ngrok authtoken $NGROK_AUTH_TOKEN
-        ngrok http 3000 &
+        ngrok http 5000 &  # Update to match the server port
 
     - name: Display Ngrok URL
       run: |
