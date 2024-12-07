@@ -28,7 +28,7 @@ jobs:
     - name: Start Backend Server
       run: |
         cd backend
-        npm start &
+        npx nodemon index.js &
         sleep 10
 
     - name: Start Ngrok
