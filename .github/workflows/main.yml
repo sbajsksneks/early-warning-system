@@ -43,3 +43,7 @@ jobs:
       run: |
         sleep 5
         curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+
+    - name: Keep Action Alive
+      run: |
+        while true; do sleep 30; done
