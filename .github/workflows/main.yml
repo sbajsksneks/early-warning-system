@@ -22,6 +22,7 @@ jobs:
       run: |
         cd frontend
         npm install
+        npm run build  # Build the frontend
         cd ../backend
         npm install
 
@@ -29,7 +30,7 @@ jobs:
       run: |
         cd backend
         npx nodemon index.js &
-        sleep 20  # Increase sleep time if needed
+        sleep 20
 
     - name: Start Ngrok
       env:
@@ -37,7 +38,7 @@ jobs:
       run: |
         npm install -g ngrok
         ngrok authtoken $NGROK_AUTH_TOKEN
-        ngrok http 5000 &  # Update to match the server port
+        ngrok http 5000 &
 
     - name: Display Ngrok URL
       run: |
