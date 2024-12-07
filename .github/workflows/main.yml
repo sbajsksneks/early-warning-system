@@ -32,18 +32,18 @@ jobs:
         npx nodemon index.js &
         sleep 20
 
-    - name: Start Ngrok
+    - name: Start Ngrok with Custom Domain
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       run: |
         npm install -g ngrok
         ngrok authtoken $NGROK_AUTH_TOKEN
-        ngrok http 5000 &
+        ngrok http --hostname=cunning-slightly-primate.ngrok-free.app 5000 &
 
     - name: Display Ngrok URL
       run: |
         sleep 5
-        curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+        echo "Your Ngrok URL is: https://cunning-slightly-primate.ngrok-free.app"
 
     - name: Keep Action Alive
       run: |
