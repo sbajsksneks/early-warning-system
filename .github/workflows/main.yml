@@ -41,8 +41,6 @@ jobs:
         ngrok http --hostname=cunning-slightly-primate.ngrok-free.app 5000 &
         sleep 5
 
-    - name: Display Ngrok URL
-      run: echo "Your Ngrok URL is: https://cunning-slightly-primate.ngrok-free.app"
 
     - name: Keep Action Alive
       run: |
