@@ -7,7 +7,8 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    # Specify the current version explicitly to avoid unexpected changes
+    runs-on: ubuntu-22.04  # Change to ubuntu-24.04 to test compatibility
 
     steps:
     - name: Checkout code
@@ -16,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'  # Update to a compatible version
+        node-version: '18'  # Ensure this version is compatible with your code
 
     - name: Install dependencies
       run: |
